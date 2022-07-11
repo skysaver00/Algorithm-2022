@@ -8,10 +8,10 @@ int main() {
 	stack<int> stack;
 	int n;
 	string str;
-
+	
 	cin >> n;
 	while(n--) { 
-		int val;	
+		int val;
 		cin >> str;
 		if(str[1] == 'u') {
 			cin >> val;
