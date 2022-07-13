@@ -12,8 +12,9 @@ int main() {
     cin >> t;
     cin.ignore();
     for(int i = 0; i < t; i++) {
-        cin.getline(sentence);
-
+        getline(cin, sentence);
+        sentence += '\n';
+        cout << sentence;
     }
 
     return 0;
