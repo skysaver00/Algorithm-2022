@@ -14,7 +14,31 @@ int main() {
     for(int i = 0; i < t; i++) {
         getline(cin, sentence);
         sentence += '\n';
-        cout << sentence;
+
+        int len = sentence.length();
+        int flag = 0;
+        for(int j = 0; j < len - 1; j++) {
+            if(sentence[j] == ' ') {
+                if(flag == 0) {
+                    flag++;
+                } else {
+                    cout << ' ';
+                }
+                while(!stack.empty()) {
+                    cout << stack.top();
+                    stack.pop();
+                }
+            } else {
+                stack.push(sentence[j]);
+            }
+        }
+        if(flag != 0) cout << " ";
+        while(!stack.empty()) {
+            cout << stack.top();
+            stack.pop();
+        }
+        cout << "\n";
+        flag = 0;
     }
 
     return 0;
