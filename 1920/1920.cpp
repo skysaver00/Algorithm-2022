@@ -5,8 +5,15 @@ using namespace std;
 
 int arr[100001];
 
-bool binary() {
+bool binary(int start, int end, int value) {
+    int mid = (start + end) / 2;
 
+    if(arr[mid] == value) return true;
+    else if(arr[mid] > value) {
+        return binary(mid + 1, end, value);
+    } else {
+        return binary(start, mid - 1, value);
+    }
 }
 
 int main() {
@@ -18,9 +25,12 @@ int main() {
 
     int m;
     cin >> m;
-    
+
     for(int i = 0; i < m; i++) {
-        int 
+        int value;
+        cin >> value;
+
+        int ans = binary(0, n - 1, value);
     }
 
     return 0;
