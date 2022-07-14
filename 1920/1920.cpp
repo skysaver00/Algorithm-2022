@@ -4,20 +4,22 @@
 using namespace std;
 
 int arr[100001];
+int n;
 
 bool binary(int start, int end, int value) {
     int mid = (start + end) / 2;
+    cout << mid << "\n";
+    if(mid == 0 || mid == n - 1) return false;
 
     if(arr[mid] == value) return true;
     else if(arr[mid] > value) {
         return binary(mid + 1, end, value);
-    } else {
+    }else {
         return binary(start, mid - 1, value);
     }
 }
 
 int main() {
-    int n;
     cin >> n;
 
     for(int i = 0; i < n; i++) cin >> arr[i];
@@ -31,6 +33,7 @@ int main() {
         cin >> value;
 
         int ans = binary(0, n - 1, value);
+        cout << ans << "\n";
     }
 
     return 0;
