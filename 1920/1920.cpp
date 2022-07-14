@@ -1,42 +1,48 @@
 #include <iostream>
+
 #include <algorithm>
 
 using namespace std;
 
 int arr[100001];
 
-bool binary(int start, int end, int value) {
-    while(end - start >= 0) {
-        int mid = (start + end) / 2;
-
-        if(arr[mid] == value) return true;
-        else if(arr[mid] <= value) {
-            start = mid + 1;
-        } else {
-            end = mid - 1;
-        }
-    }
-
-    return false;
-}
-
 int main() {
-    int n;
-    cin >> n;
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
 
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr, arr + n);
+  int n;
+  cin >> n;
 
-    int m;
-    cin >> m;
+  for (int i = 0; i < n; i++) cin >> arr[i];
+  sort(arr, arr + n);
 
-    for(int i = 0; i < m; i++){
-        int value;
-        cin >> value;
+  int m;
+  cin >> m;
 
-        int ans = binary(0, n - 1, value);
-        cout << ans << "\n";
+  for (int i = 0; i < m; i++) {
+    int value;
+    cin >> value;
+
+    int start = 0;
+    int end = n - 1;
+    int flag = 0;
+
+    while (end - start >= 0) {
+      int mid = (start + end) / 2;
+      if (arr[mid] == value) {
+        cout << "1\n";
+        flag = 1;
+        break;
+      } else if (arr[mid] <= value) {
+        start = mid + 1;
+      } else {
+        end = mid - 1;
+      }
     }
+    if (flag == 0) cout << "0\n";
+    flag = 0;
+  }
 
-    return 0;
+  return 0;
 }
