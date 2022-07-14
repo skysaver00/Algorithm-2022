@@ -5,8 +5,9 @@ using namespace std;
 int getgcd(int val1, int val2) {
     if(val1 % val2 == 0) return val2;
     else {
-        getgcd(val1, val1 % val2);
+        return getgcd(val2, val1 % val2);
     }
+
 }
 
 int main() {
@@ -22,6 +23,8 @@ int main() {
     }
 
     gcd = getgcd(val1, val2);
-    cout << gcd;
+    lcm = val1 * val2 / gcd;
+
+    cout << gcd << " " << lcm << "\n";
     return 0;
 }
