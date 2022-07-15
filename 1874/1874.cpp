@@ -2,7 +2,7 @@
 
 #include <stack>
 
-#include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -14,27 +14,23 @@ int main() {
   for (int i = 0; i < n; i++) cin >> arr[i];
 
   stack < int > stack;
-  queue < char > answer;
-  int val = 1;
+  vector < char > vec;
   int now = 0;
 
-  while (1) {
-    if (val < arr[now]) {
-      stack.push(val);
-      answer.push('+');
-      val++;
-    } else if (val == arr[now]) {
-      if (stack.top() != arr[now]) {
-        stack.push(val);
-        answer.push('+');
-        val++;
-      }
+  for (int i = 1; i <= n; i++) {
+    stack.push(i);
+    vec.push_back('+');
+
+    while (!stack.empty() && stack.top() == arr[now]) {
       stack.pop();
-      answer.push('-');
-      val--;
+      vec.push_back('-');
       now++;
     }
   }
+
+  if (!stack.empty()) cout << "NO\n";
+  else
+    for (int i = 0; i < vec.size(); i++) cout << vec[i] << "\n";
 
   return 0;
 }
