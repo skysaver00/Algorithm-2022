@@ -14,7 +14,23 @@ int main() {
         cin >> val;
 
         if(val < 2) {
-            
+            continue;
+        }
+
+        bool flag = false;
+        for(int j = 2; j < val - 1; j++) {
+            if(val % j == 0) {
+                flag = true;
+            }
+        }
+
+        if(flag == true) {
+            continue;
+        } else {
+            ans++;
         }
     }
+
+    cout << ans << "\n";
+    return 0;
 }
