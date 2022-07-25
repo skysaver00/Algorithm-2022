@@ -21,7 +21,6 @@ int main() {
     for(int i = 0; i < m; i++) {
         char one, two;
         cin >> one;
-        if(one == 'P') cin >> two;
 
         if(one == 'L') {
             if(left.empty()) continue;
@@ -42,10 +41,9 @@ int main() {
             else left.pop();
         }
         else {
+            cin >> two;
             left.push(two);
         }
-
-        cout << left.top() << " " << right.top() << "\n";
     }
 
     while(!left.empty()) {
