@@ -1,36 +1,28 @@
 #include <iostream>
-
 #include <stack>
-
-#include <vector>
 
 using namespace std;
 
 int main() {
+  string ans;
+  stack<int> stack;
   int n;
   cin >> n;
 
-  int arr[100001];
-  for (int i = 0; i < n; i++) cin >> arr[i];
+  int m = 0;
 
-  stack < int > stack;
-  vector < char > vec;
-  int now = 0;
-
-  for (int i = 1; i <= n; i++) {
-    stack.push(i);
-    vec.push_back('+');
-
-    while (!stack.empty() && stack.top() == arr[now]) {
-      stack.pop();
-      vec.push_back('-');
-      now++;
+  while(n--) {
+    int x;
+    cin >> x;
+    if(x > m) {
+      while(x > m) {
+        stack.push(++m);
+        ans += "+";
+      } else {
+        
+      }
     }
   }
-
-  if (!stack.empty()) cout << "NO\n";
-  else
-    for (int i = 0; i < vec.size(); i++) cout << vec[i] << "\n";
 
   return 0;
 }
