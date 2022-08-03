@@ -16,11 +16,12 @@ int main() {
         } else if(bar[i] == ')') {
             if(bar[i - 1] == '(') {
                 ans += now;
+                now -= 1;
             } else if(bar[i - 1] == ')') {
                 ans += 1;
+                now -= 1;
             }
         }
-        cout << i << ' ' << now << ' ' << ans << "\n";
     }
 
     cout << ans;
