@@ -13,24 +13,23 @@ int main() {
 
     stack <int> stk;
     stk.push(0);
-    int value = arr[0];
     for(int i = 1; i < n; i++) {
-        if(value < arr[i]) {
-            while(!stk.empty()) {
-                ans[stk.top()] = arr[i];
-                stk.pop();
-            }
-            value = arr[i];
-            stk.push(i);
-        } else if(value >= arr[i]) {
-            stk.push(i);
-        }
+        if(stk.empty()) stk.push(i);
 
-        for(int j = 0; j <= i; j++) {
-            cout << ans[j] << ' ';
-        } cout << "\n";
+        while(!stk.empty() && arr[stk.top()] < arr[i]) {
+            ans[stk.top()] = arr[i];
+            stk.pop();
+        }
+        stk.push(i);
     }
-    cout << "\n";
+    
+    while(!stk.empty()) {
+        ans[stk.top()] = -1;
+        stk.pop();
+    }
+
+    for(int i = 0; i < n; i++) cout << ans[i] << ' ';
+    cout << '\n';
 
     return 0;
 }
