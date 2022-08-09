@@ -25,7 +25,7 @@ int main() {
     }
 
     dp(n);
-    int max = arr[1];
+    int max = arr[0];
     for(int i = 0; i < n; i++) if(max < ans[i]) max = ans[i];
     cout << max;
 }
