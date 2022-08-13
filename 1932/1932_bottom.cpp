@@ -4,6 +4,7 @@
 using namespace std;
 vector<int> ans[501];
 vector<int> vec[501];
+int val;
 
 int main() {
     int n;
@@ -21,7 +22,6 @@ int main() {
         for(int j = 1; j < i; j++) ans[i].push_back(max(ans[i - 1][j - 1], ans[i - 1][j]) + vec[i][j]);
         ans[i].push_back(ans[i - 1][i - 1] + vec[i][i]);
     }
-    int val = 0;
     for(int i = 0; i < n; i++) val = max(val, ans[n - 1][i]);
     cout << val;
 }
