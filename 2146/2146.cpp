@@ -8,8 +8,8 @@ bool visit[101][101];
 int len2 = 99999999;
 int n;
 
-int xval[4] = {0, 1, 0, -1};
-int yval[4] = {1, 0, -1, 0};
+int xval[4] = {0, 0, 1, -1};
+int yval[4] = {1, -1, 0, 0};
 
 bool differ(int x, int y, int val) {
     if(map[x][y] == 0) return false;
@@ -39,6 +39,7 @@ int length(int x, int y) {
     bool flag = false;
 
     queue <pair<short, pair<short, short>>> que;
+    visit[x][y] = true;
     que.push(make_pair(0, make_pair(x, y)));
 
     while(!que.empty()) {
@@ -53,6 +54,8 @@ int length(int x, int y) {
         for(int i = 0; i < 4; i++) {
             int newx = x1 + xval[i];
             int newy = y1 + yval[i];
+            if(newx < 0 || newx >= n) continue;
+            if(newy < 0 || newy >= n) continue;
 
             if(island[newx][newy] == 0) {
                 ck = true;
@@ -61,7 +64,7 @@ int length(int x, int y) {
         }
         if(!ck) {
             que.pop();
-            return 99999999;
+            continue;
         }
         
         for(int i = 0; i < 4; i++) {
