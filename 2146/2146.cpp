@@ -4,6 +4,7 @@
 using namespace std;
 int map[101][101];
 int island[101][101];
+bool visit[101][101];
 int n;
 
 int xval[4] = {1, 0, -1, 0};
@@ -76,15 +77,23 @@ int length(int x, int y) {
                 }
             }
 
-            if(island[newx][newy] == 0) {
+            if(island[newx][newy] == 0 && visit[newx][newy] == false) {
+                visit[newx][newy] = true;
                 que.push(make_pair(que.front().first + 1, make_pair(newx, newy)));
             }
         }
 
         que.pop();
     }
-
     return len;
+}
+
+void reset() {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            visit[i][j] = 0;
+        }
+    }
 }
 
 int main() {
@@ -103,17 +112,12 @@ int main() {
         }
     }
 
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            cout << island[i][j] << ' ';
-        }cout << "\n";
-    }cout << "\n";
-
     int mini = 99999999;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             int temp = length(i, j);
             if(mini > temp) mini = temp;
+            reset();
         }
     }
 
