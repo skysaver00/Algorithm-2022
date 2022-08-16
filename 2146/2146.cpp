@@ -5,10 +5,11 @@ using namespace std;
 int map[101][101];
 int island[101][101];
 bool visit[101][101];
+int len2 = 99999999;
 int n;
 
-int xval[4] = {1, 0, -1, 0};
-int yval[4] = {0, 1, 0, -1};
+int xval[4] = {0, 1, 0, -1};
+int yval[4] = {1, 0, -1, 0};
 
 bool differ(int x, int y, int val) {
     if(map[x][y] == 0) return false;
@@ -37,7 +38,7 @@ int length(int x, int y) {
     int len = 99999999;
     bool flag = false;
 
-    queue <pair<int, pair<int, int>>> que;
+    queue <pair<short, pair<short, short>>> que;
     que.push(make_pair(0, make_pair(x, y)));
 
     while(!que.empty()) {
@@ -75,6 +76,11 @@ int length(int x, int y) {
                     flag = true;
                     break;
                 }
+
+                if(len2 < que.front().first) {
+                    flag = true;
+                    break;
+                }
             }
 
             if(island[newx][newy] == 0 && visit[newx][newy] == false) {
@@ -82,7 +88,6 @@ int length(int x, int y) {
                 que.push(make_pair(que.front().first + 1, make_pair(newx, newy)));
             }
         }
-
         que.pop();
     }
     return len;
@@ -116,7 +121,10 @@ int main() {
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             int temp = length(i, j);
-            if(mini > temp) mini = temp;
+            if(mini > temp) {
+                mini = temp;
+                len2 = temp;
+            }
             reset();
         }
     }
