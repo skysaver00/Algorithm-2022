@@ -22,6 +22,10 @@ int main() {
         cout << "use the stairs";
         return 0;
     }
+    if(S + U > F && S - D <= 0) {
+        cout << "use the stairs";
+        return 0;
+    }
 
     queue <pair<int, int>> que;
     que.push(make_pair(S, 0));
@@ -42,4 +46,5 @@ int main() {
         }
         que.pop();
     }
+    cout << "use the stairs";
 }
