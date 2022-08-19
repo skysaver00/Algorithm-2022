@@ -5,12 +5,8 @@ int main() {
     while(1) {
         string str;
         getline(cin, str);
-        cin.ignore();
-        cout << str << "\n";
 
         if(str[0] == '#') {
-            cout << "Flag!!\n";
-            cin.ignore();
             break;
         }
         int len = str.length();
