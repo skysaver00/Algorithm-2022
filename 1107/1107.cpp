@@ -45,7 +45,7 @@ int main() {
         up++;
     }
     if(up > 1000000) countup = 99999999;
-    if(countdown < countup) {
+    if(countdown <= countup) {
         count = countdown;
         if(down == 0) len = 1;
         while(down != 0) {
