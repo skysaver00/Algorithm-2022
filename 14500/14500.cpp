@@ -5,9 +5,9 @@ int arr[501][501];
 int n, m;
 
 int T[4][8] = {
-    {0, 0, 0, 1, 0, 2, 1, 0},
+    {0, 0, 0, 1, 0, 2, 1, 1},
     {0, 0, 1, 0, 1, 1, 2, 0},
-    {0, 0, 0, 1, 0, 2, -1, 0},
+    {0, 0, 0, 1, 0, 2, -1, 1},
     {0, 0, 1, 0, 1, -1, 2, 0}
 };
 int O[8] = {0, 0, 0, 1, 1, 0, 1, 1};
@@ -38,9 +38,9 @@ int L2[4][8] = {
 
 bool check(int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy) {
     if(ax < 0 || bx < 0 || cx < 0 || dx < 0) return false;
-    if(ax >= m || bx >= m || cx >= m || dx >= m) return false;
+    if(ax >= n || bx >= n || cx >= n || dx >= n) return false;
     if(ay < 0 || by < 0 || cy < 0 || dy < 0) return false;
-    if(ay >= n || by >= n || cy >= n || dy >= n) return false;
+    if(ay >= m || by >= m || cy >= m || dy >= m) return false;
     return true;
 }
 
@@ -54,8 +54,8 @@ int main() {
     }
 
     int ans = 0;
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
             for(int k = 0; k < 4; k++) {
                 int ax, ay, bx, by, cx, cy, dx, dy;
                 ax = j + T[k][0];
@@ -70,7 +70,7 @@ int main() {
                 if(!ck) continue;
                 if(ck) {
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
@@ -89,7 +89,7 @@ int main() {
                 if(!ck) continue;
                 if(ck) {
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
@@ -107,8 +107,9 @@ int main() {
                 bool ck = check(ax, ay, bx, by, cx, cy, dx, dy);
                 if(!ck) continue;
                 if(ck) {
+                    //cout << ax << ' ' << ay << ' ' << bx << ' ' << by << ' ' << cx << ' ' << cy << ' ' << dx << ' ' << dy << "\n";
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
@@ -127,7 +128,7 @@ int main() {
                 if(!ck) continue;
                 if(ck) {
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
@@ -146,7 +147,7 @@ int main() {
                 if(!ck) continue;
                 if(ck) {
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
@@ -165,7 +166,7 @@ int main() {
                 if(!ck) continue;
                 if(ck) {
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
@@ -184,7 +185,7 @@ int main() {
                 if(!ck) continue;
                 if(ck) {
                     int val = arr[ax][ay] + arr[bx][by] + arr[cx][cy] + arr[dx][dy];
-                    cout << val << "\n";
+                    //cout << val << "\n";
                     if(val > ans) ans = val;
                 }
             }
