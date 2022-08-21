@@ -6,19 +6,18 @@ int arr[10];
 int brr[10];
 int cnt[10];
 
-void go(int index, int n, int m) {
+void go(int index, int start, int n, int m) {
     if(index == m) {
-        for(int i = 1; i < m; i++) if(brr[arr[i]] < brr[arr[i - 1]]) return;
         for(int i = 0; i < m; i++) cout << brr[arr[i]] << ' ';
         cout << "\n";
         return;
     }
 
-    for(int i = 0; i < n; i++) {
+    for(int i = start; i < n; i++) {
         if(cnt[i] > 0) {
             cnt[i]--;
             arr[index] = i;
-            go(index + 1, n, m);
+            go(index + 1, i, n, m);
             cnt[i]++;
         }
     }
@@ -49,5 +48,5 @@ int main() {
     brr[k] = x;
     cnt[k] = c;
     n = k+1;
-    go(0, n, m);
+    go(0, 0, n, m);
 }
