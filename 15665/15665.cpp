@@ -4,6 +4,7 @@
 using namespace std;
 int arr[10];
 int brr[10];
+bool cnt[10001];
 
 void go(int index, int n, int m) {
     if(index == m) {
@@ -21,7 +22,17 @@ void go(int index, int n, int m) {
 int main() {
     int n, m;
     cin >> n >> m;
-    for(int i = 0; i < n; i++) cin >> brr[i];
-    sort(brr, brr + n);
-    go(0, n, m);
+    int temp[10];
+    for(int i = 0; i < n; i++) {
+        cin >> temp[i];
+        cnt[temp[i]] = true;
+    }
+    int now = 0;
+    for(int i = 1; i <= 10000; i++) {
+        if(cnt[i]) {
+            brr[now] = i;
+            now++;
+        }
+    }
+    go(0, now, m);
 }
