@@ -12,7 +12,7 @@ void go(int index, int n, int m) {
         return;
     }
 
-    for(int i = index; i < n; i++) {
+    for(int i = 0; i < n; i++) {
         arr[index] = i;
         go(index + 1, n, m);
     }
