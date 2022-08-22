@@ -20,5 +20,6 @@ int main() {
                 if(brr[i] == 0) cout << arr[i] << ' ';
             }cout << "\n";
         }while(next_permutation(brr, brr + n));
+        cout << "\n";
     }
 }
