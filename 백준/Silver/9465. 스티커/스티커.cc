@@ -1,41 +1,34 @@
 #include <iostream>
 
 using namespace std;
-long long ans[100001][3];
-long long arr[100001][2];
-
-long long getmax(long long i, long long j, long long k) {
-    if(i > j) {
-        if(i > k) return i;
-        else return k;
-    } else {
-        if(j > k) return j;
-        else return k;
-    }
-}
+int arr[2][100001];
+int brr[3][100001];
 
 int main() {
     int t;
     cin >> t;
-    for(int i = 0; i < t; i++) {
+    while(t--) {
         int n;
         cin >> n;
-        for(int j = 0; j < 2; j++) {
-            for(int k = 1; k <= n; k++) {
-                cin >> arr[k][j];
+        for(int i = 0; i < 2; i++) {
+            for(int j = 0; j < n; j++) cin >> arr[i][j];
+        }
+
+        brr[0][0] = arr[0][0];
+        brr[1][0] = arr[1][0];
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(j == 0) brr[0][i] = max(brr[1][i - 1], brr[2][i - 1]) + arr[0][i];
+                if(j == 1) brr[1][i] = max(brr[0][i - 1], brr[2][i - 1]) + arr[1][i];
+                if(j == 2) {
+                    brr[2][i] = max(brr[0][i - 1], brr[1][i - 1]);
+                    brr[2][i] = max(brr[2][i], brr[2][i - 1]);
+                }
             }
         }
-        ans[0][0] = ans[0][1] = ans[0][2] = 0;
-        for(int j = 1; j <= n; j++) {
-            ans[j][0] = getmax(ans[j - 1][0], ans[j - 1][1], ans[j - 1][2]);
-            ans[j][1] = max(ans[j - 1][0], ans[j - 1][2]) + arr[j][0];
-            ans[j][2] = max(ans[j - 1][0], ans[j - 1][1]) + arr[j][1];
-        }
-        cout << getmax(ans[n][0], ans[n][1], ans[n][2]) << "\n";
-        for(int j = 1; j <= n; j++) {
-            for(int k = 0; k <= 2; k++) {
-                arr[j][k] = 0;
-            }
-        }
+        int maximum = brr[0][n - 1];
+        maximum = max(brr[1][n - 1], maximum);
+        maximum = max(brr[2][n - 1], maximum);
+        cout << maximum << "\n";
     }
 }
