@@ -5,8 +5,8 @@
 #include <stack>
 
 using namespace std;
-vector <int> node[1001];
-bool visited[1001];
+vector <int> node[1005];
+bool visited[1005];
 queue <int> que;
 stack <int> stk;
 
@@ -18,14 +18,9 @@ void startstk(int n) {
     while(!stk.empty()) {
         int top = stk.top();
         int len = node[top].size();
-        //cout << "top: " << top << ' ' << len << "\n";
-
-        bool flag = false;
+        bool flag = true;
         for(int i = 0; i < len; i++) {
-            if(visited[node[top][i]]) {
-                flag = true;
-                continue;
-            }
+            if(visited[node[top][i]]) continue;
             else {
                 flag = false;
                 cout << node[top][i] << ' ';
@@ -45,7 +40,6 @@ void startque(int n) {
     
     while(!que.empty()) {
         int top = que.front();
-        //cout << top << ' ';
         int len = node[top].size();
         for(int i = 0; i < len; i++) {
             if(!visited[node[top][i]]) {
@@ -72,9 +66,7 @@ int main() {
 
     startstk(start);
     cout << "\n";
-    fill_n(visited, 1000, false);
+    fill_n(visited, 1001, false);
     startque(start);
-
-
     return 0;
 }
