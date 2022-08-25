@@ -9,15 +9,19 @@ bool flag = false;
 void dfs(int x, int index) {
     if(flag == true) return;
     if(index == 4) {
-        cout << "1\n";
-        exit(0);
+        int flag = true;
+        return;
     }
+    cout << x << ' ' << index << ' ' << vec[x].size() << "\n";
+
 
     check[x] = true;
     int len = vec[x].size();
     for(int i = 0; i < len; i++) {
+        cout << vec[x][i] << '\n';
         if(!check[vec[x][i]]) dfs(vec[x][i], index + 1);
     }
+    check[x] = false;
 }
 
 int main() {
@@ -31,9 +35,13 @@ int main() {
         vec[b].push_back(a);
     }
 
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i <= n; i++) {
         dfs(i, 0);
+        if(flag == true) {
+            cout << "1\n";
+            return 0;
+        }
         fill_n(check, 2000, 0);
     }
-    cout << "\n";
+    cout << "0\n";
 }
