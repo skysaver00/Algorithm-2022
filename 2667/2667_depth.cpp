@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <algorithm>
 
 using namespace std;
 string cmap[26];
@@ -18,7 +19,6 @@ bool go(int x, int y) {
     ans = 1;
     check[x][y] = true;
     stk.push(make_pair(x, y));
-    cout << x << ' ' << y << '\n';
 
     while(!stk.empty()) {
         int topx, topy;
@@ -35,7 +35,6 @@ bool go(int x, int y) {
             if(check[newx][newy]) continue;
             if(map[newx][newy] == 0) continue;
             else {
-                cout << newx << ' ' << newy << '\n';
                 ans++;
                 check[newx][newy] = true;
                 stk.push(make_pair(newx, newy));
@@ -43,7 +42,6 @@ bool go(int x, int y) {
                 break;
             }
         }
-
         if(flag) stk.pop();
     }
     return true;
@@ -58,10 +56,18 @@ int main() {
         }
     }
 
+    int danji = 0;
+    short apartments[2501];
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             bool get = go(i, j);
-            if(get) cout << ans << '\n';
+            if(get) {
+                apartments[danji] = ans;
+                danji++;
+            }
         }
     }
+    sort(apartments, apartments + danji);
+    cout << danji << '\n';
+    for(int i = 0; i < danji; i++) cout << apartments[i] << '\n';
 }
