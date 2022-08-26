@@ -17,11 +17,8 @@ void go(int index, int n) {
             if(arr[brr[i]] == 2) answer *= ans[i + 1];
             if(arr[brr[i]] == 3) answer /= ans[i + 1];
         }
-        cout << answer;
         if(minimum > answer) minimum = answer;
         if(maximum < answer) maximum = answer;
-
-        cout << '\n';
         return;
     }
 
@@ -48,10 +45,8 @@ int main() {
             now++;
         }
     }
-
+    
     go(0, n - 1);
-
-    for(int i = 0; i < n - 1; i++) cout << arr[i] << ' ';
-    cout << '\n';
-
+    cout << maximum << '\n';
+    cout << minimum;
 }
