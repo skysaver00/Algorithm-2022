@@ -1,35 +1,34 @@
 #include <iostream>
 #include <vector>
-#include <stack>
+#include <queue>
 
 using namespace std;
 vector <int> node[1001];
-stack <int> stk;
+queue <int> que;
 bool check[1001];
 int ans;
 
-void dfs(int x) {
+void go(int x) {
     if(check[x]) return;
     else {
-        ans++;
         check[x] = true;
-        stk.push(x);
+        ans++;
+        que.push(x);
     }
 
-    while(!stk.empty()) {
-        int top = stk.top();
+    while(!que.empty()) {
+        int top = que.front();
         int len = node[top].size();
 
-        bool flag = true;
         for(int i = 0; i < len; i++) {
             if(check[node[top][i]]) continue;
             else {
-                flag = false;
                 check[node[top][i]] = true;
-                stk.push(node[top][i]);
+                que.push(node[top][i]);
             }
         }
-        if(flag) stk.pop();
+        
+        que.pop();
     }
 }
 
@@ -43,6 +42,6 @@ int main() {
         node[b].push_back(a);
     }
 
-    for(int i = 1; i <= n; i++) dfs(i);
+    for(int i = 1; i <= n; i++) go(i);
     cout << ans;
 }
