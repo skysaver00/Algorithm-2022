@@ -12,139 +12,153 @@ int val;
 int lookx[4] = {1, 0, -1, 0};
 int looky[4] = {0, 1, 0, -1};
 
-void inspect(int n, int camera) {
+int ans = 100;
+
+void inspect(int n, int m, int camera) {
     cout << "inspect " << n << ' ' << camera <<"\n";
-    cout << cameratype[0] << "\n";
     for(int i = 0; i < camera; i++) {
         if(cameratype[i] == 1) {
             int locx, locy;
+            cout << cameraloc[i][0].first << "\n";
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
             cout << locx << ' ' << locy << "\n";
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
         } else if(cameratype[i] == 2) {
             int locx, locy;
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 2) % 4;
-                locy += (looky[looktype[i]] + 2) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 2) % 4];
+                locy += looky[(looktype[i] + 2) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
         } else if(cameratype[i] == 3) {
             int locx, locy;
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 1) % 4;
-                locy += (looky[looktype[i]] + 1) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 1) % 4];
+                locy += looky[(looktype[i] + 1) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
         } else if(cameratype[i] == 4) {
             int locx, locy;
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 1) % 4;
-                locy += (looky[looktype[i]] + 1) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 1) % 4];
+                locy += looky[(looktype[i] + 1) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 2) % 4;
-                locy += (looky[looktype[i]] + 2) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 2) % 4];
+                locy += looky[(looktype[i] + 2) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
         } else if(cameratype[i] == 5) {
             int locx, locy;
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 1) % 4;
-                locy += (looky[looktype[i]] + 1) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 1) % 4];
+                locy += looky[(looktype[i] + 1) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 2) % 4;
-                locy += (looky[looktype[i]] + 2) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 2) % 4];
+                locy += looky[(looktype[i] + 2) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
 
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            while(locx >= 0 && locx < n && locy >= 0 && locy < n) {
-                locx += (lookx[looktype[i]] + 3) % 4;
-                locy += (looky[looktype[i]] + 3) % 4;
+            while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
+                locx += lookx[(looktype[i] + 3) % 4];
+                locy += looky[(looktype[i] + 3) % 4];
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
+                if(watched[locx][locy] == 6) break;
             }
         }
     }
 
+    int getzero = 0;
     for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            cout << watched[i][j] << ' ';
-        }cout << "\n";
+        for(int j = 0; j < m; j++) if(watched[i][j] == 0) getzero++;
+    }
+    if(ans > getzero) {
+        ans = getzero;
     }
 }
 
-void go(int index, int n, int m) {
-    if(index == m) {
+void go(int index, int type, int n, int m, int camera) {
+    if(index == camera) {
         val++;
-        for(int i = 0; i < m; i++) cout << looktype[i] << ' ';
-        inspect(n, m);
+        inspect(n, m, camera);
         for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
+            for(int j = 0; j < m; j++) {
                 watched[i][j] = room[i][j];
             }
         }
-        cout << '\n';
         return;
     }
 
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < 4; i++) {
         looktype[index] = i;
-        go(index + 1, n, m);
+        go(index + 1, type, n, m, camera);
     }
 }
 
@@ -158,13 +172,13 @@ int main() {
             watched[i][j] = room[i][j];
             if(room[i][j] != 0 && room[i][j] != 6) {
                 cameratype[camera] = room[i][j];
-                cameraloc[i].push_back(make_pair(i, j));
+                cameraloc[camera].push_back(make_pair(i, j));
                 camera++;
             }
         }
     }
     cout << camera << "\n";
 
-    go(0, 4, camera);
+    go(0, 4, n, m, camera);
     cout << val;
 }
