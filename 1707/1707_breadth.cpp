@@ -20,15 +20,13 @@ bool startbfs(bool val, int x) {
     while(!que.empty()) {
         int top = que.front();
         int len = node[top].size();
+        state = check[top];
+        if(state == 1) state = 2;
+        else state = 1;
 
         for(int i = 0; i < len; i++) {
-            state = check[top];
-            if(state == 1) state = 2;
-            else state = 1;
-            //cout << '\n';
 
             if(check[node[top][i]] != 0) {
-                //cout << top << ' ' << node[top][i] << ' ' << state << ' ' << check[node[top][i]] << '\n';
                 if(check[node[top][i]] == state) continue;
                 else {
                     flag = true;
@@ -39,9 +37,6 @@ bool startbfs(bool val, int x) {
                 check[node[top][i]] = state;
                 que.push(node[top][i]);
             }
-            //cout << "Value is: ";
-            //for(int j = 1; j <= 4; j++) cout << check[j] << ' ';
-            //cout << '\n';
         }
 
         if(flag) break;
@@ -70,4 +65,6 @@ int main() {
         else cout << "NO" << "\n";
         for(int i = 1; i <= v + 1; i++) node[i].clear();
         fill_n(check, v + 1, 0);
+        while(!que.empty()) que.pop();
+    }
 }
