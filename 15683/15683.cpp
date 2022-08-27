@@ -15,14 +15,11 @@ int looky[4] = {0, 1, 0, -1};
 int ans = 100;
 
 void inspect(int n, int m, int camera) {
-    cout << "inspect " << n << ' ' << camera <<"\n";
     for(int i = 0; i < camera; i++) {
         if(cameratype[i] == 1) {
             int locx, locy;
-            cout << cameraloc[i][0].first << "\n";
             locx = cameraloc[i][0].first;
             locy = cameraloc[i][0].second;
-            cout << locx << ' ' << locy << "\n";
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
@@ -177,8 +174,7 @@ int main() {
             }
         }
     }
-    cout << camera << "\n";
 
     go(0, 4, n, m, camera);
-    cout << val;
+    cout << ans;
 }
