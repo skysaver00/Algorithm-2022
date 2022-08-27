@@ -23,6 +23,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -33,6 +35,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -42,6 +46,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 2) % 4];
                 locy += looky[(looktype[i] + 2) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -52,6 +58,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -61,6 +69,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 1) % 4];
                 locy += looky[(looktype[i] + 1) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -71,6 +81,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -80,6 +92,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 1) % 4];
                 locy += looky[(looktype[i] + 1) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -89,6 +103,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 2) % 4];
                 locy += looky[(looktype[i] + 2) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -99,6 +115,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[looktype[i]];
                 locy += looky[looktype[i]];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -108,6 +126,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 1) % 4];
                 locy += looky[(looktype[i] + 1) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -117,6 +137,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 2) % 4];
                 locy += looky[(looktype[i] + 2) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
@@ -126,6 +148,8 @@ void inspect(int n, int m, int camera) {
             while(locx >= 0 && locx < n && locy >= 0 && locy < m) {
                 locx += lookx[(looktype[i] + 3) % 4];
                 locy += looky[(looktype[i] + 3) % 4];
+                if(locx >= 0 && locx < n && locy >= 0 && locy < m);
+                else break;
                 if(watched[locx][locy] == 0) watched[locx][locy] = -1;
                 if(watched[locx][locy] == 6) break;
             }
