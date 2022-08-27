@@ -66,9 +66,8 @@ int main() {
 
         bool ans = false;
         for(int i = 1; i <= v; i++) ans = startbfs(ans, i);  
-        if(ans) cout << "YES\n";
-        else cout << "NO\n";
-        for(int i = 1; i <= v; i++) node[i].clear();
+        if(ans) cout << "YES" << "\n";
+        else cout << "NO" << "\n";
+        for(int i = 1; i <= v + 1; i++) node[i].clear();
         fill_n(check, v + 1, 0);
-    }
 }
