@@ -7,14 +7,16 @@ int arr[21];
 int number[21];
 int val;
 int ans;
+bool flag = false;
 
 void go(int index, int n, int m) {
     if(index == m) {
+        if(!flag) {
+            flag = true;
+            return;
+        }
         val = 0;
-        for(int i = 0; i < m; i++) cout << arr[i] << ' ';
-        cout << '\n'; 
         for(int i = 0; i < m; i++) if(arr[i] == 1) val += number[i];
-        cout << val << '\n';
         if(val == s) ans++;
         return;
     }
