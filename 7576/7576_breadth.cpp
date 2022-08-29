@@ -17,14 +17,7 @@ void startbfs() {
         int topx = que.front().first;
         int topy = que.front().second;
         int topv = val.front();
-        cout << topx << ' ' << topy << ' ' << topv << '\n';
 
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) cout << check[i][j] << ' ';
-            cout << '\n';
-        }
-
-        if(check[topx][topy] == 0) check[topx][topy] = topv;
         for(int i = 0; i < 4; i++) {
             int newx, newy;
             newx = que.front().first + addx[i];
@@ -34,6 +27,7 @@ void startbfs() {
 
             if(axis[newx][newy] == 0 && check[newx][newy] == 0) {
                 que.push(make_pair(newx, newy));
+                check[newx][newy] = topv + 1;
                 val.push(topv + 1);
             }
         }
@@ -50,13 +44,25 @@ int main() {
             if(axis[i][j] == 1) {
                 que.push(make_pair(i, j));
                 val.push(1);
+                check[i][j] = 1;
             }
             if(axis[i][j] == -1) check[i][j] = axis[i][j];
         }
     }
     startbfs();
+
+    int maximum = -1;
+    bool flag = false;
     for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) cout << check[i][j] << ' ';
-        cout << '\n';
+        for(int j = 0; j < m; j++) {
+            if(check[i][j] > maximum) maximum = check[i][j];
+            if(check[i][j] == 0) {
+                flag = true;
+                break;
+            }
+        }
+        if(flag) break;
     }
+    if(flag) cout << -1;
+    else cout << maximum - 1;
 }
