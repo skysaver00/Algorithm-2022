@@ -58,6 +58,7 @@ int main() {
     if(!flag) if(ans > ans1) ans = ans1;
     for(int i = 0; i < n; i++) arr[i] = arr2[i];
     ans2 = press(true);
+    flag = false;
     for(int i = 0; i < n; i++) {
         if(arr[i] != brr[i]) {
             flag = true;
