@@ -15,9 +15,6 @@ int press(bool x) {
         val++;
     } else {}
 
-    for(int i = 0; i < n; i++) cout << arr[i] << ' ';
-    cout << '\n';
-
     for(int i = 1; i < n - 1; i++) {
         if(arr[i - 1] != brr[i - 1]) {
             arr[i - 1] = !arr[i - 1];
@@ -25,10 +22,15 @@ int press(bool x) {
             arr[i + 1] = !arr[i + 1];
             val++;
         }
-        
-        for(int i = 0; i < n; i++) cout << arr[i] << ' ';
-        cout << '\n';
     }
+
+    if(arr[n - 2] != brr[n - 2]) {
+        arr[n - 2] = !arr[n - 2];
+        arr[n - 1] = !arr[n - 1];
+        val++;
+    }
+
+    return val;
 }
 
 int main() {
@@ -44,7 +46,25 @@ int main() {
     int ans1, ans2;
     ans1 = ans2 = 0;
 
+    int ans = 999999;
+    bool flag = false;
     ans1 = press(false);
+    for(int i = 0; i < n; i++) {
+        if(arr[i] != brr[i]) {
+            flag = true;
+            break;
+        }
+    }
+    if(!flag) if(ans > ans1) ans = ans1;
     for(int i = 0; i < n; i++) arr[i] = arr2[i];
     ans2 = press(true);
+    for(int i = 0; i < n; i++) {
+        if(arr[i] != brr[i]) {
+            flag = true;
+            break;
+        }
+    }
+    if(!flag) if(ans > ans2) ans = ans2;
+    if(ans >= 200000) cout << -1;
+    else cout << ans;
 }
