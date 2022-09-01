@@ -24,7 +24,7 @@ int press(bool x) {
         }
     }
 
-    if(arr[n - 2] != brr[n - 2]) {
+    if(arr[n - 1] != brr[n - 1]) {
         arr[n - 2] = !arr[n - 2];
         arr[n - 1] = !arr[n - 1];
         val++;
