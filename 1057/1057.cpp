@@ -21,11 +21,11 @@ int main() {
     int ans = 1;
     while(1) {
         int len = vec.size();
-        for(int i = 0; i < len; i += 2) {
+        for(int i = 0; i < len; i += 1) {
             int k, l;
             k = vec[i];
+            if(i + 1 >= vec.size()) break;
             l = vec[i + 1];
-            cout << k << ' ' << l << '\n';
 
             if(k == fir && l == sec) {
                 cout << ans;
@@ -40,8 +40,5 @@ int main() {
             }
         }
         ans++;
-        for(int i = 0; i < vec.size(); i++) {
-            cout << vec[i] << ' ';
-        } cout << '\n';
     }
 }
