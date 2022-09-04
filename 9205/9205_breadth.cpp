@@ -21,8 +21,7 @@ bool startbfs(int hx, int hy) {
 
         int cx = abs(fx - rockx);
         int cy = abs(fy - rocky);
-        double clen = cx * cx + cy * cy;
-        double csq = sqrt((double)clen);
+        int csq = cx + cy;
 
         if(csq <= 1000) {
             while(!que.empty()) que.pop();
@@ -36,8 +35,7 @@ bool startbfs(int hx, int hy) {
 
             int dx = abs(fx - vx);
             int dy = abs(fy - vy);
-            double dlen = dx * dx + dy * dy;
-            double dsq = sqrt((double)dlen);
+            int dsq = dx + dy;
 
             if(dsq <= 1000) {
                 que.push(make_pair(vx, vy));
