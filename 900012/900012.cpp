@@ -52,9 +52,32 @@ int main() {
             se = str2[now];
             now++;
         }
-        cout << fi << se << ' ';
-        cout << now << '\n';
 
+        int fx, fy;
+        int sx, sy;
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(fi == key[i][j]) {
+                    fx = i;
+                    fy = j;
+                }
+                if(se == key[i][j]) {
+                    sx = i;
+                    sy = j;
+                }
+            }
+        }
+        if(fx == sx) {
+            fi = key[fx][(fy + 1) % 5];
+            se = key[sx][(sy + 1) % 5];
+        } else if(fy == sy) {
+            fi = key[(fx + 1) % 5][fy];
+            se = key[(sx + 1) % 5][sy];
+        } else {
+            fi = key[fx][sy];
+            se = key[sx][fy];
+        }
+        cout << fi << se;
         if(now == len) break;
     }
 }
