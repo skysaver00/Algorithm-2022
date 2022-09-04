@@ -31,11 +31,6 @@ int main() {
     cin >> str2 >> str;
 
     makekey(str.length());
-    for(int i = 0; i < 5; i++) {
-        for(int j = 0; j < 5; j++) {
-            cout << key[i][j] << ' ';
-        }cout << '\n';
-    }
 
     int now = 0;
     int len = str2.length();
