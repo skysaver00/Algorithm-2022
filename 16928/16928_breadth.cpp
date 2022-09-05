@@ -31,16 +31,15 @@ void startbfs(int start) {
                 int val = ladde[i].first;
                 int val2 = ladde[i].second;
                 if (val == next) {
+                    flag = true;
                     if (check[val2] > 0) {
                         if (check[val2] > check[next]) {
                             que.push(val2);
                             check[val2] = check[next];
-                            flag = true;
                         }
                     } else {
                         que.push(val2);
                         check[val2] = check[next];
-                        flag = true;
                     }
                 }
             }
@@ -48,23 +47,24 @@ void startbfs(int start) {
             for (int i = 0; i < m; i++) {
                 int val = snake[i].first;
                 int val2 = snake[i].second;
-                if (val == top) {
+                if (val == next) {
+                    flag = true;
                     if (check[val2] > 0) {
                         if (check[val2] > check[next]) {
                             que.push(val2);
                             check[val2] = check[next];
-                            flag = true;
                         }
                     } else {
                         que.push(val2);
                         check[val2] = check[next];
-                        flag = true;
                     }
                 }
             }
 
             if(flag) {}
-            else que.push(next);
+            else {
+                que.push(next);
+            }
         }
         que.pop();
     }
