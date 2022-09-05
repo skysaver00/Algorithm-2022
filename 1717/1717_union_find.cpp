@@ -16,6 +16,10 @@ void unionParent(int a, int b) {
 }
 
 int main() {
+    ios_base :: sync_with_stdio(false); 
+    cin.tie(NULL); 
+    cout.tie(NULL);
+
     int a, b;
     cin >> a >> b;
     for(int i = 0; i <= a; i++) arr[i] = i;
