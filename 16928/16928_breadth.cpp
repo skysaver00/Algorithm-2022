@@ -5,6 +5,7 @@
 
 using namespace std;
 int check[102];
+int n, m;
 vector <pair<int, int>> ladde;
 vector <pair<int, int>> snake;
 queue <int> que;
@@ -15,11 +16,26 @@ void startbfs(int start) {
 
     while(!que.empty()) {
         int top = que.front();
+        for(int i = 1; i <= 6; i++) {
+            int next = top + i;
+            que.push(next);
+            if(check[next] > 0) continue;
+            else check[next] = check[top] + 1;
+        }
+
+        for(int i = 0; i < n; i++) {
+            
+        }
+
+        for(int j = 0; j < m; j++) {
+
+        }
+        
+        que.pop();
     }
 }
 
 int main() {
-    int n, m;
     cin >> n >> m;
 
     for(int i = 0; i < n; i++) {
