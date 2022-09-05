@@ -13,8 +13,8 @@ int find(int x) {
 void merge(int x, int y) {
     int a = find(x);
     int b = find(y);
-    if(a > b) arr[b] = a;
-    else arr[a] = b;
+    if(a > b) arr[a] = b;
+    else arr[b] = a;
 
     return;
 }
@@ -35,15 +35,11 @@ int main() {
         }
     }
 
-    for(int i = 1; i <= n; i++) cout << arr[i] << ' ';
-    cout << '\n';
-
-    for(int i = 0; i < m; i++) cin >> arr[i];
+    for(int i = 0; i < m; i++) cin >> arr3[i];
     for(int i = 1; i < m; i++) {
         int a, b;
-        a = arr[i - 1];
-        b = arr[i];
-        cout << find(a) << " " << find(b) << "\n";
+        a = arr3[i - 1];
+        b = arr3[i];
         if(find(a) != find(b)) {
             cout << "NO";
             return 0;
