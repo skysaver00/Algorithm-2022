@@ -8,7 +8,7 @@ int getParent(int x) {
     return arr[x] = getParent(arr[x]);
 }
 
-int unionParent(int a, int b) {
+void unionParent(int a, int b) {
     a = getParent(a);
     b = getParent(b);
     if(a < b) arr[b] = a;
@@ -16,10 +16,21 @@ int unionParent(int a, int b) {
 }
 
 int main() {
-    int val, n, m;
-    cin >> val >> n >> m;
-    for(int i = 0; i <= n; i++) arr[i] = i;
+    int a, b;
+    cin >> a >> b;
+    for(int i = 0; i <= a; i++) arr[i] = i;
+    for(int i = 0; i < b; i++) {
+        int val, n, m;
+        cin >> val >> n >> m;
 
-    
-
+        if(val == 0) {
+            unionParent(n, m);
+        } else {
+            int first = getParent(n);
+            int second = getParent(m);
+            if(first != second) cout << "NO\n";
+            else cout << "YES\n";
+        }
+    }
+    return 0;
 }
