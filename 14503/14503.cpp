@@ -24,20 +24,34 @@ void startclean(int x, int y) {
     if(flag) return;
     if(room[x][y] == 0) clean(x, y);
     int newx, newy;
+    int now;
+    cout << "Room Clean: " << x << ' ' << y << '\n';
+    cout << "ans: " << ans << '\n';
 
     while(1) {
         for(int i = 0; i < 4; i++) {
             d = change(d);
-            int now = d;
+            now = d;
             cout << d << '\n';
             newx = x + Axisx[now];
             newy = y + Axisy[now];
+            cout << "Check: " << newx << ' ' << newy << '\n';
             if(room[newx][newy] == 0) {
                 startclean(newx, newy);
+                if(flag) return;
             }
         }
-
+        x = newx + Axisx[(now + 2) % 4];
+        y = newy + Axisy[(now + 2) % 4];
+        cout << "Goback: " << x << ' ' << y << '\n';
+        if(room[x][y] == 1) {
+            flag = true;
+            return;
+        }
     }
+
+
+    
 }
 
 
