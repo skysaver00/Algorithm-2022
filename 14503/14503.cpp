@@ -14,44 +14,37 @@ int change(int x) {
     return x;
 }
 
-void clean(int x, int y) {
-    if(x == 0 && y == 0) {
-        ans++;
-    }
-}
-
 void startclean(int x, int y) {
-    if(flag) return;
-    if(room[x][y] == 0) clean(x, y);
-    int newx, newy;
-    int now;
-    cout << "Room Clean: " << x << ' ' << y << '\n';
-    cout << "ans: " << ans << '\n';
+    if(room[x][y] == 0) {
+        room[x][y] = 2;
+        ans++;
+        cout << ans << '\n';
+    }
+    int ne, newx, newy;
 
     while(1) {
         for(int i = 0; i < 4; i++) {
             d = change(d);
-            now = d;
-            cout << d << '\n';
-            newx = x + Axisx[now];
-            newy = y + Axisy[now];
-            cout << "Check: " << newx << ' ' << newy << '\n';
-            if(room[newx][newy] == 0) {
-                startclean(newx, newy);
-                if(flag) return;
-            }
+            ne = d;
+            newx = x + Axisx[ne];
+            newy = y + Axisy[ne];
+            if(room[newx][newy] == 2 || room[newx][newy] == 1) continue;
+            cout << x << ' ' << Axisx[ne] << ' ' << y << ' ' << Axisy[ne] << '\n';
+
+            cout << newx << ' ' << newy << ' ' << room[newx][newy] << '\n';
+            if(room[newx][newy] == 0) startclean(newx, newy);
         }
-        x = newx + Axisx[(now + 2) % 4];
-        y = newy + Axisy[(now + 2) % 4];
-        cout << "Goback: " << x << ' ' << y << '\n';
-        if(room[x][y] == 1) {
+
+        if(room[x + Axisx[(ne + 2) % 4]][y + Axisy[(ne + 2) % 4]] == 1) {
             flag = true;
-            return;
+            break;
         }
+
+        x = x + Axisx[(ne + 2) % 4];
+        y = y + Axisy[(ne + 2) % 4];
     }
 
-
-    
+    return;
 }
 
 
@@ -67,4 +60,5 @@ int main() {
     }
 
     startclean(r, c);
+    cout << ans << '\n';
 }
