@@ -19,17 +19,14 @@ int main() {
     }
 
     long long ans = 0;
-    while(low <= high) {
+    while(low + 1 != high) {
         mid = (low + high) / 2;
         long long sum = 0;
         for(int i = 0; i < n; i++) {
             if(arr[i] >= mid) sum += (arr[i] - mid);
         }
-        if(sum >= m) {
-            if(ans < mid) ans = mid;
-            low = mid + 1;
-        }
-        else high = mid - 1;
+        if(sum >= m) low = mid;
+        else high = mid;
     }
-    cout << ans << '\n';
+    cout << low << '\n';
 }
