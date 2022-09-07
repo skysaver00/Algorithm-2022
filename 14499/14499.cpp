@@ -5,7 +5,10 @@ int dice[4][3];
 int room[21][21];
 
 int main() {
-
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int n, m, x, y, k;
     cin >> n >> m >> x >> y >> k;
     for(int i = 0; i < n; i++) {
@@ -87,19 +90,6 @@ int main() {
             }
             cout << dice[2][1] << '\n';
         }
-        /*cout << "Room\n";
-        for(int a = 0; a < n; a++) {
-            for(int b = 0; b < m; b++) {
-                cout << room[a][b] << ' ';
-            }cout << '\n';
-        }
-
-        cout << "Dice\n";
-        for(int a = 0; a < 4; a++) {
-            for(int b = 0; b < 3; b++) {
-                cout << dice[a][b] << ' ';
-            }cout << '\n';
-        }*/
     }
     return 0;
 }
