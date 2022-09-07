@@ -1,16 +1,13 @@
 #include <iostream>
 
 using namespace std;
-int dice[3][4];
+int dice[4][3];
 int room[21][21];
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
 
     int n, m, x, y, k;
-    cin >> n >> m;
+    cin >> n >> m >> x >> y >> k;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < m; j++) {
             cin >> room[i][j];
@@ -31,18 +28,19 @@ int main() {
         if(order == 3 || order == 4) {
             if(order == 4) {
                 if(nowx + 1 >= n) continue;
+                if(r % 2 == 1)
                 up = (up + 1) % 4;
                 down = (down + 1) % 4;
                 nowx += 1;
-                dice[1][down] += room[nowx][nowy];
-                cout << dice[1][up] << '\n';
+                dice[down][1] += room[nowx][nowy];
+                cout << dice[up][1] << '\n';
             } else if(order == 3) {
                 if(nowx - 1 < 0) continue;
                 up = (up - 1) % 4;
                 down = (down - 1) % 4;
                 nowx -= 1;
-                dice[1][down] += room[nowx][nowy];
-                cout << dice[1][up] << '\n';
+                dice[down][1] += room[nowx][nowy];
+                cout << dice[up][1] << '\n';
             }
         } else if(order == 1 || order == 2) {
             if(order == 1) if(nowy + 1 >= m) continue;
@@ -94,8 +92,8 @@ int main() {
                 }
             }
         }
-        for(int a = 0; a < 3; a++) {
-            for(int b = 0; b < 4; b++) {
+        for(int a = 0; a < 4; a++) {
+            for(int b = 0; b < 3; b++) {
                 cout << dice[a][b] << ' ';
             }cout << '\n';
         }
