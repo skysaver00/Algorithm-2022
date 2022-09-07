@@ -39,7 +39,7 @@ int main() {
                 if(room[nowx][nowy] != 0) {
                     dice[0][1] = room[nowx][nowy];
                     room[nowx][nowy] = 0;
-                } if(room[nowx][nowy] == 0) {
+                } else if(room[nowx][nowy] == 0) {
                     room[nowx][nowy] = dice[0][1];
                 }
             } else {
@@ -52,7 +52,7 @@ int main() {
                 if(room[nowx][nowy] != 0) {
                     dice[0][1] = room[nowx][nowy];
                     room[nowx][nowy] = 0;
-                } if(room[nowx][nowy] == 0) {
+                } else if(room[nowx][nowy] == 0) {
                     room[nowx][nowy] = dice[0][1];
                 }
             }
@@ -68,7 +68,7 @@ int main() {
                 if(room[nowx][nowy] != 0) {
                     dice[0][1] = room[nowx][nowy];
                     room[nowx][nowy] = 0;
-                } if(room[nowx][nowy] == 0) {
+                } else if(room[nowx][nowy] == 0) {
                     room[nowx][nowy] = dice[0][1];
                 }
             } else {
@@ -81,14 +81,21 @@ int main() {
                 if(room[nowx][nowy] != 0) {
                     dice[0][1] = room[nowx][nowy];
                     room[nowx][nowy] = 0;
-                } if(room[nowx][nowy] == 0) {
+                } else if(room[nowx][nowy] == 0) {
                     room[nowx][nowy] = dice[0][1];
                 }
             }
             cout << dice[2][1] << '\n';
         }
+        /*cout << "Room\n";
+        for(int a = 0; a < n; a++) {
+            for(int b = 0; b < m; b++) {
+                cout << room[a][b] << ' ';
+            }cout << '\n';
+        }
 
-        /*for(int a = 0; a < 4; a++) {
+        cout << "Dice\n";
+        for(int a = 0; a < 4; a++) {
             for(int b = 0; b < 3; b++) {
                 cout << dice[a][b] << ' ';
             }cout << '\n';
