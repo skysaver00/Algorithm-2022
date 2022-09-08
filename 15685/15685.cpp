@@ -11,6 +11,10 @@ int axisx[4] = {0, -1, 0, 1};
 int axisy[4] = {1, 0, -1, 0};
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int n;
     cin >> n;
     for(int i = 0; i < n; i++) {
