@@ -4,7 +4,7 @@
 
 using namespace std;
 vector <pair<int, int>> vec;
-int arr[101][101];
+int arr[105][105];
 
 int main() {
     int r, c, k;
@@ -19,12 +19,16 @@ int main() {
     down = right = 3;
     int ans = 0;
     while(1) {
+        if(ans > 100) {
+            cout << -1;
+            return 0;
+        }
         if(arr[r - 1][c - 1] == k) {
             cout << ans;
             return 0;
         }
 
-        if(right >= down) {
+        if(right <= down) {
             int tempright = 0;
             for(int i = 0; i < down; i++) {
                 for(int j = 0; j < right; j++) {
@@ -45,6 +49,7 @@ int main() {
                 sort(vec.begin(), vec.end());
                 int sz = vec.size();
                 int t = 0;
+                for(int j = 0; j < right; j++) arr[i][j] = 0;
                 for(int j = 0; j < sz; j++) {
                     if(t == 100) break;
                     arr[i][t] = vec[j].second;
@@ -70,13 +75,14 @@ int main() {
                         }
                     }   
                     if(!flag) {
-                        if(arr[i][j] == 0) continue;
-                        vec.push_back(make_pair(1, arr[i][j]));
+                        if(arr[j][i] == 0) continue;
+                        vec.push_back(make_pair(1, arr[j][i]));
                     }
                 }
                 sort(vec.begin(), vec.end());
                 int sz = vec.size();
                 int t = 0;
+                for(int j = 0; j < down; j++) arr[j][i] = 0;
                 for(int j = 0; j < sz; j++) {
                     if(t == 100) break;
                     arr[t][i] = vec[j].second;
@@ -86,14 +92,9 @@ int main() {
                 }
                 if(t > tempdown) tempdown = t;
                 vec.clear();
-                cout << '\n';
             }
-            cout << down << ' ' << tempdown << '\n';
             if(down < tempdown) down = tempdown;
         }
-        for(int i = 0; i < down; i++) {
-            for(int j = 0; j < right; j++) cout << arr[i][j] << ' ';
-            cout << '\n';
-        }cout << '\n';
+        ans++;
     }
 }
