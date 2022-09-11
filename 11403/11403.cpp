@@ -28,5 +28,16 @@ int main() {
         }
     }
 
-    for(int i = )
+    for(int i = 1; i <= n; i++) cout << arr[i] << ' ';
+    cout << '\n';
+
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= n; j++) {
+            int a, b;
+            a = getParent(i);
+            b = getParent(j);
+            if(a == b) cout << "1 ";
+            else cout << "0 ";
+        } cout << '\n';
+    }
 }
