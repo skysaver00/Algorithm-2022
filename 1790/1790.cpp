@@ -3,16 +3,16 @@
 using namespace std;
 long long val;
 
+void getval(int i) {
+    int now = 0;
+    while(now <= i) {
+        
+    }
+}
+
 int main() {
     int n, k;
     cin >> n >> k;
 
-    int now = 1;
-    int i = 1;
-    while(val <= k && now < n) {
-        if(val + i * 9 <= k) {
-            val += (i * 9);
-            
-        }
-    }
+    get
 }
