@@ -4,9 +4,13 @@ using namespace std;
 long long val;
 
 void getval(int i) {
-    int now = 0;
+    long long now = 0;
+    long long j = 1;
+    long long k = 0;
     while(now <= i) {
-        
+        val += (j * 9) - k;
+        if(k == 0) k = 10;
+        else k *= 10;
     }
 }
 
