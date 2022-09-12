@@ -1,43 +1,37 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
-int arr[101];
+int arr[101][101];
+bool check[101];
+int n;
+queue <int> que;
 
-int getParent(int x) {
-    if(arr[x] == x) return x;
-    return arr[x] = getParent(arr[x]);
+bool startbfs(int i, int j) {
+    que.push(i);
+    check[i] = true;
+
+    while(!que.empty()) {
+        int front = que.front();
+        que.pop();
+        for(int i = 0; i < n; i++) {
+            if(arr[front][i] == 1 && )   
+        }
+    }
+    return false;
 }
-
-void unionParent(int a, int b) {
-    a = getParent(a);
-    b = getParent(b);
-    if(a < b) arr[b] = a;
-    else arr[a] = b;
-}
-
 
 int main() {
-    int n;
     cin >> n;
-    for(int i = 1; i <= n; i++) arr[i] = i;
-    for(int i = 1; i <= n; i++) {
-        for(int j = 1; j <= n; j++) {
-            int k;
-            cin >> k;
-            if(k == 1) unionParent(i, j);
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cin >> arr[i][j];
         }
     }
 
-    for(int i = 1; i <= n; i++) cout << arr[i] << ' ';
-    cout << '\n';
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
 
-    for(int i = 1; i <= n; i++) {
-        for(int j = 1; j <= n; j++) {
-            int a, b;
-            a = getParent(i);
-            b = getParent(j);
-            if(a == b) cout << "1 ";
-            else cout << "0 ";
-        } cout << '\n';
+        }
     }
 }
