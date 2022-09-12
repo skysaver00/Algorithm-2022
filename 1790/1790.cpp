@@ -4,19 +4,35 @@ using namespace std;
 long long val;
 
 void getval(int i) {
-    long long now = 0;
+    long long now = 10;
     long long j = 1;
-    long long k = 0;
+    long long k = 1;
     while(now <= i) {
-        val += (j * 9) - k;
-        if(k == 0) k = 10;
-        else k *= 10;
+        val += (j * 9) * k;
+        j *= 10;
+        k++;
+        now *= 10;
     }
+    now /= 10;
+    val += (i - now + 1) * k;
 }
 
 int main() {
     int n, k;
     cin >> n >> k;
 
-    get
+    int left = 1;
+    int right = n;
+    int mid;
+    while(left < right) {
+        mid = (left + right) / 2;
+        getval(mid);
+        if(val < k) left = mid + 1;
+        else right = mid;
+        val = 0;
+    }
+    getval(left);
+    cout << left << ' ' << val << '\n';
+
+    cout << val << '\n';
 }
