@@ -9,13 +9,19 @@ queue <int> que;
 
 bool startbfs(int i, int j) {
     que.push(i);
-    check[i] = true;
 
     while(!que.empty()) {
         int front = que.front();
+        if(front == j && check[j]) {
+            while(!que.empty()) que.pop();
+            return true;
+        }
         que.pop();
         for(int i = 0; i < n; i++) {
-            if(arr[front][i] == 1 && )   
+            if(arr[front][i] == 1 && !check[i]) {
+                check[i] = true;
+                que.push(i);
+            }  
         }
     }
     return false;
@@ -31,7 +37,8 @@ int main() {
 
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-
-        }
+            cout << startbfs(i, j) << ' ';
+            fill_n(check, 100, false);
+        }cout << '\n';
     }
 }
