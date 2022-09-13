@@ -30,11 +30,11 @@ int main() {
         cin >> o >> a >> b;
         if(o == 0) unionFind(a, b);
         else {
-            int x, y;
-            x = getParent(a);
-            y = getParent(b);
-            if(x == y) cout << "YES\n";
-            else cout << "NO\n";
+            int x = getParent(a);
+            int y = getParent(b);
+            if(x != y) cout << "NO\n";
+            else cout << "YES\n";
         }
     }
+    return 0;
 }
