@@ -53,5 +53,5 @@ int main() {
         else ans++;
     }
     cout << ans << '\n';
-
+    return 0;
 }
