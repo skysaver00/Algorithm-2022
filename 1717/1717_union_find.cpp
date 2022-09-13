@@ -8,9 +8,9 @@ int getParent(int x) {
     return getParent(arr[x]);
 }
 
-void unionFind(int x, int y) {
-    int a = getParent(x);
-    int b = getParent(y);
+void unionFind(int a, int b) {
+    a = getParent(a);
+    b = getParent(b);
     if(a < b) arr[b] = a;
     else arr[a] = b;
 }
@@ -32,8 +32,8 @@ int main() {
         else {
             int x = getParent(a);
             int y = getParent(b);
-            if(x != y) cout << "NO\n";
-            else cout << "YES\n";
+            if(x == y) cout << "YES\n";
+            else cout << "NO\n";
         }
     }
     return 0;
