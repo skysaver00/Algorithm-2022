@@ -20,19 +20,31 @@ void getval(int i) {
 int main() {
     int n, k;
     cin >> n >> k;
+    getval(n);
+
+    if(val < k) {
+        cout << "-1\n";
+        return 0;
+    }
+    val = 0;
 
     int left = 1;
     int right = n;
-    int mid;
-    while(left < right) {
+    int ans, mid;
+    while(left <= right) {
         mid = (left + right) / 2;
         getval(mid);
         if(val < k) left = mid + 1;
-        else right = mid;
+        else {
+            ans = mid;
+            right = mid - 1;
+        }
         val = 0;
     }
-    getval(left);
-    cout << left << ' ' << val << '\n';
+    getval(ans);
+    string s = to_string(ans);
+    long long l = val;
+    cout << s[s.length()-(l-k)-1] << '\n';
 
-    cout << val << '\n';
+    return 0;
 }
