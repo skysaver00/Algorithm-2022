@@ -5,12 +5,12 @@ int arr[1000001];
 
 int getParent(int x) {
     if(arr[x] == x) return x;
-    return getParent(arr[x]);
+    return arr[x] = getParent(arr[x]);
 }
 
-void unionFind(int a, int b) {
-    a = getParent(a);
-    b = getParent(b);
+void unionFind(int x, int y) {
+    int a = getParent(x);
+    int b = getParent(y);
     if(a < b) arr[b] = a;
     else arr[a] = b;
 }
