@@ -27,24 +27,28 @@ int main() {
     while(left / n == 0) {
         if(flag2) ans--;
         flag2 = false;
-
         sushi[arr[left % n]]--;
-        if(sushi[arr[left % n]] == 0) ans--;
 
+        if(sushi[arr[left % n]] == 0) ans--;
         left++;
         right++;
-        sushi[arr[right % n]]++;
 
         if(sushi[arr[right % n]] == 0) flag = true;
+        sushi[arr[right % n]]++;
         if(sushi[arr[right % n]] > 0 && flag) ans++;
-
         flag = false;
+
+        //for(int i = 1; i <= 10; i++) cout << sushi[i] << ' ';
+        //cout << '\n';
 
         if(sushi[arr[(left - 1) % n]] == 0 && arr[(left - 1) % n] == c) flag2 = true;
         if(sushi[arr[(right + 1) % n]] == 0 && arr[(right + 1) % n] == c) flag2 = true;
-        if(flag2) ans++;
-        if(maxi < ans) maxi == ans;
-        cout << left << ' ' << right << '\n';
-        cout << maxi << '\n';
+        
+        //cout << ans << '\n';
+        if(maxi < ans) maxi = ans;
+        //cout << left << ' ' << right << '\n';
+        //cout << maxi << '\n';
     }
+    cout << maxi << '\n';
+    return 0;
 }
