@@ -5,6 +5,10 @@ int arr[30001];
 int sushi[3001];
 
 int main() {
+    ios_base :: sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int n, d, k, c;
     cin >> n >> d >> k >> c;
 
