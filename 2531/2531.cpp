@@ -5,6 +5,10 @@ int arr[30001];
 int sushi[3001];
 
 int main() {
+    ios_base :: sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int n, d, k, c;
     cin >> n >> d >> k >> c;
 
@@ -43,7 +47,10 @@ int main() {
 
         if(sushi[arr[(left - 1) % n]] == 0 && arr[(left - 1) % n] == c) flag2 = true;
         if(sushi[arr[(right + 1) % n]] == 0 && arr[(right + 1) % n] == c) flag2 = true;
-        
+        if(!flag && sushi[c] == 0) {
+            ans++;
+            flag2 = true;
+        }
         //cout << ans << '\n';
         if(maxi < ans) maxi = ans;
         //cout << left << ' ' << right << '\n';
