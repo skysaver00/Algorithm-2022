@@ -1,32 +1,37 @@
-#include <iostream>
+#include <cstdio>
 #include <stack>
-
 using namespace std;
-int arr[500001];
-stack <int> stk;
-
+int n;
+int a[500000];
 int main() {
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    int n;
-    cin >> n;
-    for(int i = 0; i < n; i++) cin >> arr[i];
-
-    int ans = 0;
-    stk.push(arr[0]);
-    for(int i = 1; i < n; i++) {
-        while(!stk.empty()) {
-            int top = stk.top();
-            if(top < arr[i]) {
-                ans++;
-                stk.pop();
-            } else break;
-        }
-
-        if(!stk.empty()) ans++;
-        stk.push(arr[i]);
+    scanf("%d",&n);
+    for (int i=0; i<n; i++) {
+        scanf("%d",&a[i]);
     }
-    cout << ans << '\n';
+    stack<int> s;
+    stack<int> c;
+    long long ans = 0;
+    for (int i=0; i<n; i++) {
+        int h = a[i];
+        int cnt = 1;
+        while (!s.empty()) {
+            if (s.top() <= a[i]) {
+                ans += (long long)c.top();
+                if (s.top() == a[i]) {
+                    cnt += c.top();
+                }
+                s.pop();
+                c.pop();
+            } else {
+                break;
+            }
+        }
+        if (!s.empty()) {
+            ans += 1LL;
+        }
+        s.push(h);
+        c.push(cnt);
+    }
+    printf("%lld\n",ans);
+    return 0;
 }
