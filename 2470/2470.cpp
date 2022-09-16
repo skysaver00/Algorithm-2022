@@ -8,6 +8,7 @@ long long sort[100001];
 void conquer(int left, int right) {
     int i, j, k;
     int mid = (left + right) / 2;
+    printf("%d %d\n", left, right);
 
     i = left;
     j = mid + 1;
@@ -23,6 +24,8 @@ void conquer(int left, int right) {
     } else if(j <= right) {
         while(j <= right) sort[k++] = unsort[j++];
     }
+    for(int i = left; i <= right; i++) printf("%d ", sort[i]);
+    printf("\n");
 
     i = left;
     while(i <= right) unsort[i++] = sort[i++];
@@ -41,7 +44,7 @@ int main() {
     int n;
     scanf("%d", &n);
     for(int i = 0; i < n; i++) scanf("%d", &unsort[i]);
-    divide(0, n);
+    divide(0, n - 1);
 
     for(int i = 0; i < n; i++) printf("%d ", unsort[i]);
 }
