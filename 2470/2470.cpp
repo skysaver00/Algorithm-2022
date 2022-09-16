@@ -14,16 +14,34 @@ void conquer(int left, int right) {
     k = left;
 
     while(i <= mid && j <= right) {
-        if(unsort[i] < unsort[j]) {
+        if(unsort[i] < unsort[j]) sort[k++] = unsort[i++];
+        else sort[k++] = unsort[j++];
+    }
 
-        }
+    if(i <= mid) {
+        while(i <= mid) sort[k++] = unsort[i++];
+    } else if(j <= right) {
+        while(j <= right) sort[k++] = unsort[j++];
+    }
+
+    i = left;
+    while(i <= right) unsort[i++] = sort[i++];
+}
+
+void divide(int left, int right) {
+    if(left < right) {
+        int mid = (left + right) / 2;
+        divide(left, mid);
+        divide(mid + 1, right);
+        conquer(left, right);
     }
 }
 
-void divide() {
-
-}
-
 int main() {
+    int n;
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++) scanf("%d", &unsort[i]);
+    divide(0, n);
 
+    for(int i = 0; i < n; i++) printf("%d ", unsort[i]);
 }
