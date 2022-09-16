@@ -1,5 +1,5 @@
 #include <cstdio>
-#include <cmath>
+#include <math.h>
 
 int unsort[100001];
 int sort[100001];
@@ -42,6 +42,27 @@ void divide(int left, int right) {
 int main() {
     int n;
     scanf("%d", &n);
+    for(int i = 0; i < n; i++) scanf("%d", &unsort[i]);
     divide(0, n - 1);
 
+    int left, right;
+    left = 0; right = n - 1;
+    int val, sum;
+    val = 2100000000;
+    int lans, rans;
+
+    while(left != right) {
+        sum = abs(unsort[left] + unsort[right]);
+        
+        if(sum <= val) {
+            val = sum;
+            lans = unsort[left];
+            rans = unsort[right];
+        }
+
+        if(unsort[left] + unsort[right] < 0) left++;
+        else right--;
+    }
+    printf("%d %d\n", lans, rans);
+    return 0;
 }
