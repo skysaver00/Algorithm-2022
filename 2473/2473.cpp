@@ -34,7 +34,7 @@ int main() {
                 tans = arr[third];
             }
 
-            if(sum <= 0) {
+            if(arr[first] + arr[second] + arr[third] <= 0) {
                 second++;
             } else {
                 third--;
