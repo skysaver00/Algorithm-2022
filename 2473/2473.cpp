@@ -10,7 +10,7 @@ int main() {
     ios_base :: sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    
+
     int n;
     cin >> n;
 
@@ -19,8 +19,8 @@ int main() {
 
     long long first, second, third;
     long long fans, sans, tans;
-    long long ans = 3100000000;;
-    for(int i = 0; i < n; i++) {
+    long long ans = 3100000000;
+    for(int i = 0; i < n - 2; i++) {
         first = i;
         second = i + 1;
         third = n - 1;
