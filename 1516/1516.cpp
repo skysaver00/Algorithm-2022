@@ -16,8 +16,8 @@ int main() {
 
     int n;
     cin >> n;
+    
     int pri;
-
     for(int i = 1; i <= n; i++) {
         cin >> construction[i];
         while(1) {
@@ -29,6 +29,7 @@ int main() {
             } 
         }
     }
+
     for(int i = 1; i <= n; i++) if(ind[i] == 0) pq.push(i);
 
     while(!pq.empty()) {
@@ -45,6 +46,7 @@ int main() {
             }
         }
     }
+
     for(int i = 1; i <= n; i++) cout << construction[i] << '\n';
     return 0;
 }
