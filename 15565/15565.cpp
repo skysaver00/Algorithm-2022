@@ -19,9 +19,15 @@ int main() {
     left = 0;
     right = 0;
     if(arr[left] == 1) now++;
+    else {
+        while(arr[left] != 1) {
+            left++;
+            right++;
+        }
+        now++;
+    }
 
     while(right < n) {
-        cout << left << ' ' << right << ' ' << now << '\n';
         if(now < k) right++;
         else {
             int sub = right - left;
@@ -31,8 +37,10 @@ int main() {
             while(arr[left] != 1) left++;
             now--;
         }
-
         if(arr[right] == 1) now++;
     }
-    cout << ans + 1 << '\n';
+
+    if(ans < 9000000) cout << ans + 1;
+    else cout << -1;
+    return 0;
 }
