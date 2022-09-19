@@ -13,7 +13,7 @@ int main() {
     ios_base :: sync_with_stdio(0);
     cin.tie();
     cout.tie();
-    
+
     int n, m;
     cin >> n >> m;
 
@@ -28,7 +28,6 @@ int main() {
         if(ind[i] == 0) {
             pq.push(i);
             check[i] = true;
-            break;
         }
     }
 
@@ -41,13 +40,12 @@ int main() {
         for(int i = 0; i < sz; i++) {
             ind[question[top][i]]--;
             que.push(question[top][i]);
-        }
 
-        for(int i = 1; i <= n; i++) {
-            if(ind[i] == 0 && check[i] == false) {
-                pq.push(i);
-                check[i] = true;
-            }
+            if(ind[question[top][i]] == 0 && check[question[top][i]] == false) {
+                pq.push(question[top][i]);
+                check[question[top][i]] = true;
+            } 
         }
     }
+    return 0;
 }
