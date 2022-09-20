@@ -28,10 +28,7 @@ int main() {
         }
     }
 
-    for(int i = 1; i <= n; i++) {
-        int sz = vec[i].size();
-        if(sz == 0) pq.push(i);
-    }
+    for(int i = 1; i <= n; i++) if(ind[i] == 0) pq.push(i);
 
     while(!pq.empty()) {
         int top = pq.top();
@@ -43,13 +40,14 @@ int main() {
             if(addtime[vec[top][i]] < time[top]) addtime[vec[top][i]] = time[top];
             if(ind[vec[top][i]] == 0) {
                 time[vec[top][i]] += addtime[vec[top][i]];
+                pq.push(vec[top][i]);
             }
         }
     }
 
-    for(int i = 1; i <= n; i++) {
-        cout << time[i] << ' ';
-    }cout << '\n';
+    int ans = -1;
+    for(int i = 1; i <= n; i++) if(time[i] > ans) ans = time[i];
+    cout << ans;
 
     return 0;
 }
