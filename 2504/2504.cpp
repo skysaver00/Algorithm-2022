@@ -23,14 +23,14 @@ int main() {
         }
 
         if(now == ')') {
-            if(stk.empty() || stk.top() == '[') {
+            if(stk.empty() || stk.top() != '(') {
                 cout << "0\n";
                 return 0;
             }
             vec.push_back({sz - 1, 2});
             stk.pop();
         } else if(now = ']') {
-            if(stk.empty() || stk.top() == '(') {
+            if(stk.empty() || stk.top() != '[') {
                 cout << "0\n";
                 return 0;
             }
