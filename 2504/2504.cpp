@@ -11,7 +11,6 @@ int main() {
     cin >> str;
 
     int len = str.length();
-    int ans = 0;
     for(int i = 0; i < len; i++) {
         int sz = stk.size();
         char now = str[i];
@@ -24,15 +23,15 @@ int main() {
         }
 
         if(now == ')') {
-            if(stk.top() == '[') {
-                cout << 0 << '\n';
+            if(stk.empty() || stk.top() == '[') {
+                cout << "0\n";
                 return 0;
             }
             vec.push_back({sz - 1, 2});
             stk.pop();
         } else if(now = ']') {
-            if(stk.top() == '(') {
-                cout << 0 << '\n';
+            if(stk.empty() || stk.top() == '(') {
+                cout << "0\n";
                 return 0;
             }
             vec.push_back({sz - 1, 3});
@@ -49,11 +48,26 @@ int main() {
     fill_n(val, 30, 1);
 
     int sz = vec.size();
-    int start = 0;
-    int now;
-    for(int i = 0; i < sz; i++) {
-        if()
-        cout << vec[i].first << ' ' << vec[i].second << '\n';
+    for(int i = 1; i < sz; i++) {
+        int start = i;
+        if(vec[i - 1].first > vec[i].first) {
+            while(start != -1) {
+                start -= 1;
+                if(vec[start].first == vec[i].first) break;
+            }
+        }
+
+        start++;
+        for(int j = start; j < i; j++) {
+            vec[j].second *= vec[i].second;
+        }
     }
+
+    int ans = vec[0].second;
+
+    for(int i = 1; i < sz; i++) {
+        if(vec[i].first >= vec[i - 1].first) ans += vec[i].second;
+    }
+    cout << ans << '\n';
     return 0;
 }
