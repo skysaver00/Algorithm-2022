@@ -5,7 +5,7 @@
 using namespace std;
 string str;
 stack <char> stk;
-vector <pair<int, int>> vec;
+vector <pair<long long, long long>> vec;
 
 int main() {
     cin >> str;
@@ -44,9 +44,6 @@ int main() {
         return 0;
     }
 
-    int val[35];
-    fill_n(val, 30, 1);
-
     int sz = vec.size();
     for(int i = 1; i < sz; i++) {
         int start = i;
@@ -63,7 +60,7 @@ int main() {
         }
     }
 
-    int ans = vec[0].second;
+    long long ans = vec[0].second;
 
     for(int i = 1; i < sz; i++) {
         if(vec[i].first >= vec[i - 1].first) ans += vec[i].second;
