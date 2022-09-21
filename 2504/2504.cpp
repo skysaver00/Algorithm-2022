@@ -4,8 +4,9 @@
 
 using namespace std;
 string str;
-stack <char> stk;
-vector <pair<long long, long long>> vec;
+stack <int> stk;
+int temp = 1;
+int sum = 0;
 
 int main() {
     cin >> str;
@@ -16,55 +17,35 @@ int main() {
         char now = str[i];
         if(now == '(') {
             stk.push('(');
-            continue;
+            temp *= 2;
         } else if(now == '[') {
             stk.push('[');
-            continue;
-        }
-
-        if(now == ')') {
+            temp *= 3;
+        } else if(now == ')') {
             if(stk.empty() || stk.top() != '(') {
                 cout << "0\n";
                 return 0;
             }
-            vec.push_back({sz - 1, 2});
+            if(str[i - 1] == '(') {
+                sum += temp;
+            }
             stk.pop();
+            temp /= 2;
         } else if(now = ']') {
             if(stk.empty() || stk.top() != '[') {
                 cout << "0\n";
                 return 0;
             }
-            vec.push_back({sz - 1, 3});
+            if(str[i - 1] == '[') {
+                sum += temp;
+            }
             stk.pop();
+            temp /= 3;
         }
     }
 
     if(!stk.empty()) {
-        cout << 0 << '\n';
+        cout << "0\n";
         return 0;
-    }
-
-    int sz = vec.size();
-    for(int i = 1; i < sz; i++) {
-        int start = i;
-        if(vec[i - 1].first > vec[i].first) {
-            while(start != -1) {
-                start -= 1;
-                if(vec[start].first == vec[i].first) break;
-            }
-        }
-
-        start++;
-        for(int j = start; j < i; j++) {
-            vec[j].second *= vec[i].second;
-        }
-    }
-
-    long long ans = vec[0].second;
-
-    for(int i = 1; i < sz; i++) {
-        if(vec[i].first >= vec[i - 1].first) ans += vec[i].second;
-    }
-    cout << ans << '\n';
-    return 0;
+    } else cout << sum;
 }
