@@ -29,7 +29,8 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].second - s <= 0) {
                     vec[i].second += n;
-                    vec[i].second -= s;
+                    vec[i].second -= (s % n);
+                    if(s % n == 0) vec[i].second -= n;
                 } else vec[i].second -= s;
             }
         }
@@ -37,11 +38,13 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].second - s <= 0) {
                     vec[i].second += n;
-                    vec[i].second -= s;
+                    vec[i].second -= (s % n);
+                    if(s % n == 0) vec[i].second -= n;
                 } else vec[i].second -= s;
                 if(vec[i].first - s <= 0) {
                     vec[i].first += n;
-                    vec[i].first -= s;
+                    vec[i].first -= (s % n);
+                    if(s % n == 0) vec[i].first -= n;
                 } else vec[i].first -= s;
             }
         }
@@ -49,7 +52,7 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].first - s <= 0) {
                     vec[i].first += n;
-                    vec[i].first -= s;
+                    vec[i].first -= (s % n);
                 } else vec[i].first -= s;
             }
         }
@@ -57,11 +60,11 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].second + s > n) {
                     vec[i].second -= n;
-                    vec[i].second += s;
+                    vec[i].second += (s % n);
                 } else vec[i].second += s;
                 if(vec[i].first - s <= 0) {
                     vec[i].first += n;
-                    vec[i].first -= s;
+                    vec[i].first -= (s % n);
                 } else vec[i].first -= s;
             }
         }
@@ -69,7 +72,7 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].second + s > n) {
                     vec[i].second -= n;
-                    vec[i].second += s;
+                    vec[i].second += (s % n);
                 } else vec[i].second += s;
             }
         }
@@ -77,11 +80,11 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].second + s > n) {
                     vec[i].second -= n;
-                    vec[i].second += s;
+                    vec[i].second += (s % n);
                 } else vec[i].second += s;
                 if(vec[i].first + s > n) {
                     vec[i].first -= n;
-                    vec[i].first += s;
+                    vec[i].first += (s % n);
                 } else vec[i].first += s;
             }
         }
@@ -89,7 +92,7 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].first + s > n) {
                     vec[i].first -= n;
-                    vec[i].first += s;
+                    vec[i].first += (s % n);
                 } else vec[i].first += s;
             }
         }
@@ -97,11 +100,11 @@ int main() {
             for(int i = 0; i < sz; i++) {
                 if(vec[i].second - s <= 0) {
                     vec[i].second += n;
-                    vec[i].second -= s;
+                    vec[i].second -= (s % n);
                 } else vec[i].second -= s;
                 if(vec[i].first + s > n) {
                     vec[i].first -= n;
-                    vec[i].first += s;
+                    vec[i].first += (s % n);
                 } else vec[i].first += s;
             }
         }
