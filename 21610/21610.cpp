@@ -118,12 +118,6 @@ int main() {
             if(arr[vec[i].first + 1][vec[i].second - 1] != 0) arr[vec[i].first][vec[i].second]++;
             if(arr[vec[i].first + 1][vec[i].second + 1] != 0) arr[vec[i].first][vec[i].second]++;
         }
-        
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j <= n; j++) {
-                cout << arr[i][j] << ' ';
-            }cout << '\n';
-        }cout << '\n';
 
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= n; j++) {
@@ -144,20 +138,14 @@ int main() {
         vec.clear();
         vec = vec_cp;
         vec_cp.clear();
-        
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j <= n; j++) {
-                cout << arr[i][j] << ' ';
-            }cout << '\n';
-        }cout << '\n';
     }
 
     int ans = 0;
     for(int i = 1; i <= n; i++) {
         for(int j = 1; j <= n; j++) {
             ans += arr[i][j];
-            cout << arr[i][j] << ' ';
-        }cout << '\n';
+        }
     }
     cout << ans << '\n';
+    return 0;
 }
