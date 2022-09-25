@@ -3,6 +3,7 @@
 
 using namespace std;
 vector <pair<int, int>> vec;
+vector <pair<int, int>> vec_cp;
 int arr[52][52];
 
 int main() {
@@ -27,90 +28,136 @@ int main() {
         int sz = vec.size();
         if(d == 1) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].second - s <= 0) {
+                if(vec[i].second - (s % n) <= 0) {
                     vec[i].second += n;
                     vec[i].second -= (s % n);
                     if(s % n == 0) vec[i].second -= n;
-                } else vec[i].second -= s;
+                } else vec[i].second -= (s % n);
             }
         }
         if(d == 2) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].second - s <= 0) {
+                if(vec[i].second - (s % n) <= 0) {
                     vec[i].second += n;
                     vec[i].second -= (s % n);
                     if(s % n == 0) vec[i].second -= n;
-                } else vec[i].second -= s;
-                if(vec[i].first - s <= 0) {
+                } else vec[i].second -= (s % n);
+                if(vec[i].first - (s % n) <= 0) {
                     vec[i].first += n;
                     vec[i].first -= (s % n);
                     if(s % n == 0) vec[i].first -= n;
-                } else vec[i].first -= s;
+                } else vec[i].first -= (s % n);
             }
         }
         if(d == 3) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].first - s <= 0) {
+                if(vec[i].first - (s % n) <= 0) {
                     vec[i].first += n;
                     vec[i].first -= (s % n);
-                } else vec[i].first -= s;
+                } else vec[i].first -= (s % n);
             }
         }
         if(d == 4) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].second + s > n) {
+                if(vec[i].second + (s % n) > n) {
                     vec[i].second -= n;
                     vec[i].second += (s % n);
-                } else vec[i].second += s;
-                if(vec[i].first - s <= 0) {
+                } else vec[i].second += (s % n);
+                if(vec[i].first - (s % n) <= 0) {
                     vec[i].first += n;
                     vec[i].first -= (s % n);
-                } else vec[i].first -= s;
+                } else vec[i].first -= (s % n);
             }
         }
         if(d == 5) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].second + s > n) {
+                if(vec[i].second + (s % n) > n) {
                     vec[i].second -= n;
                     vec[i].second += (s % n);
-                } else vec[i].second += s;
+                } else vec[i].second += (s % n);
             }
         }
         if(d == 6) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].second + s > n) {
+                if(vec[i].second + (s % n) > n) {
                     vec[i].second -= n;
                     vec[i].second += (s % n);
-                } else vec[i].second += s;
-                if(vec[i].first + s > n) {
+                } else vec[i].second += (s % n);
+                if(vec[i].first + (s % n) > n) {
                     vec[i].first -= n;
                     vec[i].first += (s % n);
-                } else vec[i].first += s;
+                } else vec[i].first += (s % n);
             }
         }
         if(d == 7) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].first + s > n) {
+                if(vec[i].first + (s % n) > n) {
                     vec[i].first -= n;
                     vec[i].first += (s % n);
-                } else vec[i].first += s;
+                } else vec[i].first += (s % n);
             }
         }
         if(d == 8) {
             for(int i = 0; i < sz; i++) {
-                if(vec[i].second - s <= 0) {
+                if(vec[i].second - (s % n) <= 0) {
                     vec[i].second += n;
                     vec[i].second -= (s % n);
-                } else vec[i].second -= s;
-                if(vec[i].first + s > n) {
+                } else vec[i].second -= (s % n);
+                if(vec[i].first + (s % n) > n) {
                     vec[i].first -= n;
                     vec[i].first += (s % n);
-                } else vec[i].first += s;
+                } else vec[i].first += (s % n);
             }
         }
 
+        for(int i = 0; i < sz; i++) arr[vec[i].first][vec[i].second]++;
+
         for(int i = 0; i < sz; i++) {
-            cout << vec[i].first << ' ' << vec[i].second << '\n';
+            if(arr[vec[i].first - 1][vec[i].second - 1] != 0) arr[vec[i].first][vec[i].second]++;
+            if(arr[vec[i].first - 1][vec[i].second + 1] != 0) arr[vec[i].first][vec[i].second]++;
+            if(arr[vec[i].first + 1][vec[i].second - 1] != 0) arr[vec[i].first][vec[i].second]++;
+            if(arr[vec[i].first + 1][vec[i].second + 1] != 0) arr[vec[i].first][vec[i].second]++;
         }
+        
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                cout << arr[i][j] << ' ';
+            }cout << '\n';
+        }cout << '\n';
+
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                int flag = 0;
+                for(int l = 0; l < sz; l++) {
+                    if(i == vec[l].first && j == vec[l].second) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if(arr[i][j] >= 2 && flag == 0) {
+                    arr[i][j] -= 2;
+                    vec_cp.push_back({i, j});
+                }
+            }
+        }
+
+        vec.clear();
+        vec = vec_cp;
+        vec_cp.clear();
+        
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                cout << arr[i][j] << ' ';
+            }cout << '\n';
+        }cout << '\n';
     }
+
+    int ans = 0;
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= n; j++) {
+            ans += arr[i][j];
+            cout << arr[i][j] << ' ';
+        }cout << '\n';
+    }
+    cout << ans << '\n';
 }
