@@ -122,7 +122,34 @@ int main() {
             }cout << '\n';
         }
 
+        while(!que.empty()) {
+            int first = que.front();
+            que.pop();
 
+            int second;
+            if(!que.empty()) {
+                second = que.front();
+                que.pop();
+            } else second = 100000;
+
+            if(first == second) {
+                fi_que.push(2);
+                fi_que.push(first);
+            } else {
+                fi_que.push(1);
+                fi_que.push(first);
+                if(second != 100000) {
+                    fi_que.push(1);
+                    fi_que.push(second);
+                }
+            }
+        }
+
+        que = fi_que;
+        while(!que.empty()) {
+            cout << que.front() << ' ';
+            que.pop();
+        } cout << '\n';
 
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= n; j++) cout << arr[i][j] << ' ';
