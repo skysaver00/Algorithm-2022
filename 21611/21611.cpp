@@ -78,17 +78,13 @@ int main() {
             if (dir == 4) dir = 0;
         }
 
-        for(int i = 1; i <= 7; i++) {
-            for(int j = 1; j <= 7; j++) {
-                cout << arr[i][j] << ' ';
-            }cout << '\n';
-        }
-
         int flag = 1;
         while (flag != 0) {
             flag = 0;
 
-            int sz = que.size();
+            int sz = 0;
+            if(!que.empty()) sz = que.size();
+            if(sz == 0) break;
             int bomb = 1;
             for (int i = 0; i < sz; i++) {
                 int front = que.front();
@@ -128,6 +124,10 @@ int main() {
             }
 
             if (cp_que.size() >= 4) {
+                int fro4 = cp_que.front();
+                if(fro4 == 1) m1 += bomb;
+                else if(fro4 == 2) m2 += bomb;
+                else if(fro4 == 3) m3 += bomb;
                 while (!cp_que.empty()) {
                     cp_que.pop();
                 }
@@ -141,34 +141,38 @@ int main() {
 
             while (!fi_que.empty()) {
                 int fr = fi_que.front();
-                cout << fr << ' ';
+                //cout << fr << ' ';
                 fi_que.pop();
                 que.push(fr);
-            }cout << '\n';
+            }//cout << '\n';
+
+            if(que.empty()) flag = 1;
         }
 
         int now = 1;
-        int fro = fi_que.front();
-        vec.push_back({fro, 1});
-        fi_que.pop();
-        while(!fi_que.empty()) {
-            int fro = fi_que.front();
+        if (!que.empty()) {
+            int fro = que.front();
+            vec.push_back({fro, 1});
+            que.pop();
+        }
+
+        while(!que.empty()) {
+            int fro = que.front();
             if(vec[now - 1].first != fro) {
                 now++;
                 vec.push_back({fro, 1});
             } else {
                 vec[now - 1].second++;
             }
+            que.pop();
         }
 
         int sz2 = vec.size();
         for(int i = 0; i < sz2; i++) {
             que.push(vec[i].second);
             que.push(vec[i].first);
-
-            cout << vec[i].second << ' ' << vec[i].first << ' ';
-        }cout << '\n';
-
+        }
+        vec.clear();
         fi_que = emp;
 
         p = 0;
@@ -197,10 +201,10 @@ int main() {
         while(!cp_que.empty()) cp_que.pop();
         while(!fi_que.empty()) fi_que.pop();
 
-        for (int i = 1; i <= n; i++) {
+        /*for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) cout << arr[i][j] << ' ';
             cout << '\n';
-        }
+        }*/
         
     }
     cout << m1 + 2 * m2 + 3 * m3 << '\n';
