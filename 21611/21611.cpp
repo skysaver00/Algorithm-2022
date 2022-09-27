@@ -65,27 +65,28 @@ int main() {
         }
 
         int flag = 1;
-        while(flag) {
+        while(flag != 0) {
             flag = 0;
 
+            int sz = que.size();
             int bomb = 1;
-            while(!que.empty()) {
+            for(int i = 0; i < sz; i++) {
                 int front = que.front();
-                cout << front << ' ' << '\n';
 
-                if(cp_que.empty()) cp_que.push(front);
+                if(i == 0) cp_que.push(front);
                 else {
                     int front2 = cp_que.front();
                     if(front == front2) {
                         cp_que.push(front);
                         bomb++;
-                        flag = 1;
                     } else {
                         if(bomb >= 4) {
                             while(!cp_que.empty()) {
                                 cp_que.pop();
                             }
                             cp_que.push(front);
+                            bomb = 1;
+                            flag = 1;
                         } else {
                             while(!cp_que.empty()) {
                                 int pu_fr = cp_que.front();
@@ -118,7 +119,7 @@ int main() {
                 fi_que.pop();
                 cout << fr << ' ';
                 que.push(fr);
-            }
+            }cout << '\n';
         }
 
 
