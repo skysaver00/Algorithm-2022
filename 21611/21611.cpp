@@ -8,6 +8,8 @@ int gox[4] = {0, 1, 0, -1};
 int goy[4] = {-1, 0, 1, 0};
 
 queue <int> que;
+queue <int> cp_que;
+queue <int> fi_que;
 
 int main() {
     int n, m;
@@ -61,6 +63,65 @@ int main() {
             p++;
             if(dir == 4) dir = 0;
         }
+
+        int flag = 1;
+        while(flag) {
+            flag = 0;
+
+            int bomb = 1;
+            while(!que.empty()) {
+                int front = que.front();
+                cout << front << ' ' << '\n';
+
+                if(cp_que.empty()) cp_que.push(front);
+                else {
+                    int front2 = cp_que.front();
+                    if(front == front2) {
+                        cp_que.push(front);
+                        bomb++;
+                        flag = 1;
+                    } else {
+                        if(bomb >= 4) {
+                            while(!cp_que.empty()) {
+                                cp_que.pop();
+                            }
+                            cp_que.push(front);
+                        } else {
+                            while(!cp_que.empty()) {
+                                int pu_fr = cp_que.front();
+                                fi_que.push(pu_fr);
+                                cp_que.pop();
+                            }
+                            bomb = 1;
+                            cp_que.push(front);
+                        }
+                    }
+                }
+
+                que.pop();
+            }
+
+            if(cp_que.size() >= 4) {
+                while(!cp_que.empty()) {
+                    cp_que.pop();
+                }
+            } else {
+                while(!cp_que.empty()) {
+                    int fr = cp_que.front();
+                    cp_que.pop();
+                    fi_que.push(fr);
+                }
+            }
+
+            while(!fi_que.empty()) {
+                int fr = fi_que.front();
+                fi_que.pop();
+                cout << fr << ' ';
+                que.push(fr);
+            }
+        }
+
+
 
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= n; j++) cout << arr[i][j] << ' ';
