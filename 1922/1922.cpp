@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <queue>
 
 using namespace std;
@@ -22,10 +21,6 @@ int main() {
 
         vec[a].push_back({c, b});
         vec[b].push_back({c, a});
-    }
-
-    for(int i = 0; i < m; i++) {
-        if(vec[i].size()) sort(vec[i].begin(), vec[i].end());
     }
 
     cnt[1] = 1;
