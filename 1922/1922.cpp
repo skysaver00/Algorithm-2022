@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
-int count[1001];
-vector <pair<int, int>> vec[1001];
-vector <pair<int, pair<int, int>>> pr;
+int cnt[1005];
+vector <pair<int, int>> vec[1005];
+priority_queue <pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
 int main() {
     ios_base :: sync_with_stdio(false);
@@ -20,14 +21,33 @@ int main() {
         cin >> a >> b >> c;
 
         vec[a].push_back({c, b});
+        vec[b].push_back({c, a});
     }
 
     for(int i = 0; i < m; i++) {
-        sort(vec[i].begin(), vec[i].end());
+        if(vec[i].size()) sort(vec[i].begin(), vec[i].end());
     }
 
-    pr.push_back({1, {vec[1][0].second, vec[1][0].first}});
-    cout << pr[0].first << ' ' << pr[0].second.first << ' ' << pr[0].second.second << '\n';
+    cnt[1] = 1;
+    int sz = vec[1].size();
+    int ans = 0;
+    for(int i = 0; i < sz; i++) pq.push({vec[1][i].first, vec[1][i].second});
 
+    while(!pq.empty()) {
+        int fr, se;
+        fr = pq.top().first;
+        se = pq.top().second;
+
+        pq.pop();
+
+        if(cnt[se] == 1) continue;
+        cnt[se] = 1;
+        ans += fr;
+
+        int sz2 = vec[se].size();
+        for(int i = 0; i < sz2; i++) pq.push({vec[se][i].first, vec[se][i].second});
+    }
+
+    cout << ans << '\n';
     return 0;
 }
