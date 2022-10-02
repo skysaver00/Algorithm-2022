@@ -25,14 +25,11 @@ int main() {
         } else if(val == 'P') {
             price[i + 1] = (d - 1) - price[i];
         } else {
-            price[i + 1] = 500 - price[i];
+            price[i + 1] = d;
         }
     }
     int ans = 0;
-    for(int i = 1; i <= len; i++) {
-        cout << price[i] << ' ';
-        ans += price[i];
-    }cout << '\n';
+    for(int i = 1; i <= len; i++) ans += price[i];
     cout << ans;
     return 0;
 }
