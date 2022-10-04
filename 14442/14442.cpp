@@ -21,6 +21,7 @@ void startbfs(int i, int j, int k) {
         prey = que.front().first.second;
         int trou = que.front().second;
         que.pop();
+        cout << prex << ' ' << prey << '\n';
 
         for(int i = 0; i < 4; i++) {
             int newx, newy;
@@ -40,6 +41,13 @@ void startbfs(int i, int j, int k) {
                 }
             }
         }
+
+        for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cout << val[i][j] << ' ';
+        }cout << '\n';
+    }
+
     }
 }
 
@@ -53,6 +61,13 @@ int main() {
     }
 
     startbfs(0, 0, 0);
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cout << val[i][j] << ' ';
+        }cout << '\n';
+    }
+
     cout << val[n - 1][m - 1];
     return 0;
 }
