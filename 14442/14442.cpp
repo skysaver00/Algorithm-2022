@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int n, m, k;
+int n, m, p;
 queue <pair<pair<int, int>, int>> que;
 int mp[1001][1001];
 int val[1001][1001];
@@ -23,13 +23,11 @@ void startbfs(int i, int j, int k) {
         prey = que.front().first.second;
         int trou = que.front().second;
         que.pop();
-        cout << prex << ' ' << prey << '\n';
 
         for(int i = 0; i < 4; i++) {
             int newx, newy;
             newx = prex + x_[i];
             newy = prey + y_[i];
-            cout << newx << ' ' << newy << '\n';
 
             if(newx < 0 || newx >= n || newy < 0 || newy >= m) continue;
             else {
@@ -37,10 +35,12 @@ void startbfs(int i, int j, int k) {
                 ck[newx][newy] = true;
 
                 if(mp[newx][newy] == 1) {
-                    if(trou + 1 <= k) {
+                    if(trou + 1 <= p) {
                         que.push({{newx, newy}, trou + 1});
                         val[newx][newy] = val[prex][prey] + 1;
-                    } else {};
+                    } else {
+                        ck[newx][newy] = false;
+                    }
                 } else {
                     que.push({{newx, newy}, trou});
                     val[newx][newy] = val[prex][prey] + 1;
@@ -53,7 +53,11 @@ void startbfs(int i, int j, int k) {
 }
 
 int main() {
-    cin >> n >> m >> k;
+    ios_base :: sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> n >> m >> p;
 
     string str;
     for(int i = 0; i < n; i++) {
@@ -63,14 +67,10 @@ int main() {
             mp[i][j] = str[j] - 0x30;
         }
     }
+    
     startbfs(0, 0, 0);
 
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
-            cout << val[i][j] << ' ';
-        }cout << '\n';
-    }
-
-    cout << val[n - 1][m - 1];
+    if(val[n - 1][m - 1] == 0) cout << "-1\n";
+    else cout << val[n - 1][m - 1];
     return 0;
 }
