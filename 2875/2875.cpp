@@ -14,15 +14,13 @@ int main() {
         n = m * 2;
     } else if(nn < m) {
         ingman = m - n / 2;
-        m = n / 2;
-    }
-
-    if(nn > m) {
-        ingwoman = n - m * 2;
-        n = m * 2;
+        m = n / 2;    
+        if(nn > m) {
+            ingwoman = n - m * 2;
+            n = m * 2;
+        }
     }
     
-
     if(ingman + ingwoman >= k) cout << m;
     else {
         while(ingman + ingwoman < k) {
