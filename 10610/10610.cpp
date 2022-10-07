@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -6,6 +7,8 @@ int main() {
     string str;
     cin >> str;
     int len = str.length();
+    sort(str, str + len, greater<>());
+
 
     int ans = 0;
     bool flag = false;
