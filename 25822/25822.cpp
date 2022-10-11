@@ -2,67 +2,50 @@
 #include <vector>
 
 using namespace std;
+vector <int> no;
 int arr[100001];
-int yes[100001];
-int no[100001];
-vector <int> vec;
+int dp[100001][3];
 
 int main() {
     double c;
     cin >> c;
     c /= 0.99;
+    if(c >= 2.0) c = 2;
     int cc = c;
 
     int n;
     cin >> n;
-    int now = 0;
-    int day = 0;
-    int yon = 1;
-    int maxi = -9999;
+
+    int maxi = 0;
     for(int i = 0; i < n; i++) {
         cin >> arr[i];
         if(maxi < arr[i]) maxi = arr[i];
-        if(arr[i] == 0) {
-            if(yon == 1) {
-                yes[now] = day;
-                day = 1;
-            } else if(yon == 0) {
-                day++;
+    }
+
+    if(arr[0] == 0) dp[0][0] = 0;
+    else dp[0][0] = 1;
+
+    if(dp[0][0] == 0 && c > 0) dp[0][1] = 1;
+
+    for(int i = 1; i < n; i++) {
+        if(arr[i] > 0) {
+            for(int j = 0; j <= cc; j++) {
+                dp[i][j] = dp[i - 1][j] + 1;
             }
-            yon = 0;
         } else {
-            if(yon == 0) {
-                no[now] = day;
-                day = 1;
-                now++;
-            } else {
-                day++;
-            }
-            yon = 1;
-        }
-    }
-    if(yon == 0) no[now] = day;
-    else yes[now] = day;
-
-    int la = -9999;
-    for(int i = 0; i <= now; i++) {
-        int maxday = 0;
-        for(int j = i; j <= now; j++) {
-            if(cc >= no[j]) {
-                maxday += yes[j];
-                maxday += no[j];
-                cc -= no[j];
-            } else {
-                maxday += yes[j];
-                maxday += cc;
-                break;
+            for(int j = 1; j <= cc; j++) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
             }
         }
-        if(la < maxday) la = maxday;
-        cc = c;
     }
 
-    cout << la << '\n' << maxi << '\n';
+    int maxday = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j <= cc; j++) {
+            if(maxday < dp[i][j]) maxday = dp[i][j];
+        }
+    }
 
+    cout << maxday << '\n' << maxi << '\n';
     return 0;
 }
