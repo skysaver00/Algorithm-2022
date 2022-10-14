@@ -4,9 +4,9 @@
 using namespace std;
 int smell[4][4];
 bool ckm[4][4];
-vector <int> vec[4][4];
-vector < pair<int, pair<int, int> > > cfish;
-vector < pair<int, pair<int, int> > > mfish;
+int vec[4][4][8];
+int cfish[4][4][8];
+int mfish[4][4][8];
 int x_[10] = {0, -1, -1, -1, 0, 1, 1, 1};
 int y_[10] = {-1, -1, 0, 1, 1, 1, 0, -1};
 
@@ -33,7 +33,9 @@ void sharkkill() {
         newsy += sharky_[sharkmove[i]];
 
         if(newsx < 0 || newsx >= 4 || newsy < 0 || newsy >= 4) return;
-        if(ckm[newsx][newsy] == 0) ans += vec[newsx][newsy].size();
+        if(ckm[newsx][newsy] == 0) {
+            for(int i = 0; i < 8; i++) ans += vec[newsx][newsy][i];
+        }
         ckm[newsx][newsy] = 1;
     }
 
@@ -66,7 +68,7 @@ int main() {
     for(int i = 0; i < m; i++) {
         int fx, fy, d;
         cin >> fx >> fy >> d;
-        vec[fx - 1][fy - 1].push_back(d - 1);
+        vec[fx - 1][fy - 1][d - 1]++;
     }
     cin >> sx >> sy;
     sx -= 1;
@@ -75,30 +77,26 @@ int main() {
     for(int ii = 0; ii < s; ii++) {
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
-                int msz = vec[i][j].size();
-                for(int k = 0; k < msz; k++) {
-                    cfish.push_back({i, {j, vec[i][j][k]}});
+                for(int k = 0; k < 8; k++) {
+                    cfish[i][j][k] = vec[i][j][k];
                 }
             }
         }
 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
-                int msz = vec[i][j].size();
-                for(int k = 0; k < msz; k++) {
-                    int newfx, newfy;
-                    int fdir = vec[i][j][k];
-                    int newdir;
+                for(int k = 0; k < 8; k++) {
+                    int newfx, newfy, newdir;
+                    int fdir = k;
                     int flag = 0;
-                    
-                    if(flag == 0 && ii == 3) cout << i << ' ' << j << ' ' << fdir << '\n';
-                    
+                    if(vec[i][j][k] == 0) continue;
+
                     for(int l = 0; l < 8; l++) {
-                        newdir = fdir - l;
+                        newdir = k - l;
                         if(newdir < 0) newdir += 8;
                         newfx = i + x_[newdir];
                         newfy = j + y_[newdir];
-
+                        
                         if(newfx < 0 || newfx >= 4 || newfy < 0 || newfy >= 4) continue;
                         if(smell[newfx][newfy] > 0) continue;
                         if(newfx == sx && newfy == sy) continue;
@@ -107,36 +105,43 @@ int main() {
                         break;
                     }
 
-                    vec[i][j].erase(vec[i][j].begin());
-                    if(flag == 1) mfish.push_back({newfx, {newfy, newdir}});
-                    else mfish.push_back({i, {j, fdir}});
+                    if(flag == 1) mfish[newfx][newfy][newdir] += vec[i][j][k];
+                    else mfish[i][j][k] += vec[i][j][k];
 
-                    if(flag == 1 && ii == 3) cout << newfx << ' ' << newfy << ' ' << newdir << '\n';
-                    if(flag == 0 && ii == 3) cout << i << ' ' << j << ' ' << fdir << '\n';
+                    vec[i][j][k] = 0;
                 }
             }
         }
 
-        int mfsz = mfish.size();
-        for(int i = 0; i < mfsz; i++) {
-            vec[mfish[i].first][mfish[i].second.first].push_back(mfish[i].second.second);
-        }
-
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
-                cout << vec[i][j].size() << ' ';
+                for(int k = 0; k < 8; k++) vec[i][j][k] = mfish[i][j][k];
+            }
+        }
+        
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                int pppp = 0;
+                for(int k = 0; k < 8; k++) pppp += vec[i][j][k];
+                cout << pppp << ' ';
             }cout << '\n';
         }cout << '\n';
         
         killedfish = -9999;
         sharkdfs();
+        cout << sx << ' ' << sy << ' ' << killedfish << '\n';
         for(int i = 0; i < 3; i++) {
             sx += sharkx_[finalmove[i]];
             sy += sharky_[finalmove[i]];
 
-            if(vec[sx][sy].size() > 0) smell[sx][sy] = 3;
-            vec[sx][sy].clear();
+            int pppp = 0;
+            for(int k = 0; k < 8; k++) pppp += vec[sx][sy][k];
+
+
+            if(pppp > 0) smell[sx][sy] = 3;
+            for(int k = 0; k < 8; k++) vec[sx][sy][k] = 0;
         }
+        cout << sx << ' ' << sy << '\n';
 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
@@ -146,30 +151,42 @@ int main() {
 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
-                cout << vec[i][j].size() << ' ';
+                int pppp = 0;
+                for(int k = 0; k < 8; k++) pppp += vec[i][j][k];
+                cout << pppp << ' ';
             }cout << '\n';
         }cout << '\n';
 
-        int csz = cfish.size();
-        for(int i = 0; i < csz; i++) {
-            vec[cfish[i].first][cfish[i].second.first].push_back(cfish[i].second.second);
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                for(int k = 0; k < 8; k++) vec[i][j][k] += cfish[i][j][k];
+            }
         }
 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
-                cout << vec[i][j].size() << ' ';
+                int pppp = 0;
+                for(int k = 0; k < 8; k++) pppp += vec[i][j][k];
+                cout << pppp << ' ';
             }cout << '\n';
         }cout << '\n';
         
-        cfish.clear();
-        mfish.clear();
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                for(int k = 0; k < 8; k++) {
+                    cfish[i][j][k] = 0;
+                    mfish[i][j][k] = 0;
+                }
+            }
+        }
     }
 
     int finalanswer = 0;
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
-            int finalsz = vec[i][j].size();
-            finalanswer += finalsz;
+            for(int k = 0; k < 8; k++) {
+                finalanswer += vec[i][j][k];
+            }
         }
     }
     
