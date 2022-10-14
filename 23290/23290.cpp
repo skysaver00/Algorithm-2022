@@ -26,7 +26,7 @@ void sharkkill() {
             ckm[i][j] = 0;
         }
     }
-    
+
     int ans = 0;
     for(int i = 0; i < 3; i++) {
         newsx += sharkx_[sharkmove[i]];
@@ -89,6 +89,10 @@ int main() {
                     int newfx, newfy;
                     int fdir = vec[i][j][k];
                     int newdir;
+                    int flag = 0;
+                    
+                    if(flag == 0 && ii == 3) cout << i << ' ' << j << ' ' << fdir << '\n';
+                    
                     for(int l = 0; l < 8; l++) {
                         newdir = fdir - l;
                         if(newdir < 0) newdir += 8;
@@ -99,12 +103,44 @@ int main() {
                         if(smell[newfx][newfy] > 0) continue;
                         if(newfx == sx && newfy == sy) continue;
 
+                        flag = 1;
                         break;
                     }
 
                     vec[i][j].erase(vec[i][j].begin());
-                    mfish.push_back({newfx, {newfy, newdir}});
+                    if(flag == 1) mfish.push_back({newfx, {newfy, newdir}});
+                    else mfish.push_back({i, {j, fdir}});
+
+                    if(flag == 1 && ii == 3) cout << newfx << ' ' << newfy << ' ' << newdir << '\n';
+                    if(flag == 0 && ii == 3) cout << i << ' ' << j << ' ' << fdir << '\n';
                 }
+            }
+        }
+
+        int mfsz = mfish.size();
+        for(int i = 0; i < mfsz; i++) {
+            vec[mfish[i].first][mfish[i].second.first].push_back(mfish[i].second.second);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                cout << vec[i][j].size() << ' ';
+            }cout << '\n';
+        }cout << '\n';
+        
+        killedfish = -9999;
+        sharkdfs();
+        for(int i = 0; i < 3; i++) {
+            sx += sharkx_[finalmove[i]];
+            sy += sharky_[finalmove[i]];
+
+            if(vec[sx][sy].size() > 0) smell[sx][sy] = 3;
+            vec[sx][sy].clear();
+        }
+
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                if(smell[i][j] > 0) smell[i][j] -= 1;
             }
         }
 
@@ -114,37 +150,29 @@ int main() {
             }cout << '\n';
         }cout << '\n';
 
-        int mfsz = mfish.size();
-        for(int i = 0; i < mfsz; i++) {
-            vec[mfish[i].first][mfish[i].second.first].push_back(mfish[i].second.second);
-        }cout << '\n';
+        int csz = cfish.size();
+        for(int i = 0; i < csz; i++) {
+            vec[cfish[i].first][cfish[i].second.first].push_back(cfish[i].second.second);
+        }
 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
                 cout << vec[i][j].size() << ' ';
             }cout << '\n';
-        }
-
-        killedfish = -9999;
-        sharkdfs();
-        for(int i = 0; i < 3; i++) {
-            cout << finalmove[i] << ' ';
-            sx += sharkx_[finalmove[i]];
-            sy += sharky_[finalmove[i]];
-
-            if(vec[sx][sy].size() > 0) smell[sx][sy] = 2;
-            vec[sx][sy].clear();
         }cout << '\n';
-
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                cout << vec[i][j].size() << ' ';
-            }cout << '\n';
-        }
-        cout << killedfish << ' ' << sx << ' ' << sy << '\n';
+        
+        cfish.clear();
+        mfish.clear();
     }
 
-
-
+    int finalanswer = 0;
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            int finalsz = vec[i][j].size();
+            finalanswer += finalsz;
+        }
+    }
+    
+    cout << finalanswer << '\n';
     return 0;
 }
