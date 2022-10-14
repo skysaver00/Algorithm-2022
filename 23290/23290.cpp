@@ -12,7 +12,7 @@ int y_[10] = {-1, -1, 0, 1, 1, 1, 0, -1};
 
 int sx, sy;
 int sharkx_[4] = {-1, 0, 1, 0};
-int sharky_[4] = {0, 1, 0, -1};
+int sharky_[4] = {0, -1, 0, 1};
 int sharkmove[3];
 int finalmove[3];
 int killedfish;
@@ -34,7 +34,7 @@ void sharkkill() {
 
         if(newsx < 0 || newsx >= 4 || newsy < 0 || newsy >= 4) return;
         if(ckm[newsx][newsy] == 0) {
-            for(int i = 0; i < 8; i++) ans += vec[newsx][newsy][i];
+            for(int j = 0; j < 8; j++) ans += vec[newsx][newsy][j];
         }
         ckm[newsx][newsy] = 1;
     }
@@ -74,7 +74,7 @@ int main() {
     sx -= 1;
     sy -= 1;
 
-    for(int ii = 0; ii < s; ii++) {
+    for(int ii = 1; ii <= s; ii++) {
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
                 for(int k = 0; k < 8; k++) {
@@ -92,13 +92,12 @@ int main() {
                     if(vec[i][j][k] == 0) continue;
 
                     for(int l = 0; l < 8; l++) {
-                        newdir = k - l;
-                        if(newdir < 0) newdir += 8;
+                        newdir = (8 + k - l) % 8;
                         newfx = i + x_[newdir];
                         newfy = j + y_[newdir];
                         
                         if(newfx < 0 || newfx >= 4 || newfy < 0 || newfy >= 4) continue;
-                        if(smell[newfx][newfy] > 0) continue;
+                        if(smell[newfx][newfy] != 0 && ii - smell[newfx][newfy] <= 2) continue;
                         if(newfx == sx && newfy == sy) continue;
 
                         flag = 1;
@@ -119,17 +118,8 @@ int main() {
             }
         }
         
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                int pppp = 0;
-                for(int k = 0; k < 8; k++) pppp += vec[i][j][k];
-                cout << pppp << ' ';
-            }cout << '\n';
-        }cout << '\n';
-        
         killedfish = -9999;
         sharkdfs();
-        cout << sx << ' ' << sy << ' ' << killedfish << '\n';
         for(int i = 0; i < 3; i++) {
             sx += sharkx_[finalmove[i]];
             sy += sharky_[finalmove[i]];
@@ -138,38 +128,17 @@ int main() {
             for(int k = 0; k < 8; k++) pppp += vec[sx][sy][k];
 
 
-            if(pppp > 0) smell[sx][sy] = 3;
-            for(int k = 0; k < 8; k++) vec[sx][sy][k] = 0;
-        }
-        cout << sx << ' ' << sy << '\n';
-
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                if(smell[i][j] > 0) smell[i][j] -= 1;
+            if(pppp > 0) {
+                smell[sx][sy] = ii;
+                for(int k = 0; k < 8; k++) vec[sx][sy][k] = 0;
             }
         }
-
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                int pppp = 0;
-                for(int k = 0; k < 8; k++) pppp += vec[i][j][k];
-                cout << pppp << ' ';
-            }cout << '\n';
-        }cout << '\n';
 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
                 for(int k = 0; k < 8; k++) vec[i][j][k] += cfish[i][j][k];
             }
         }
-
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                int pppp = 0;
-                for(int k = 0; k < 8; k++) pppp += vec[i][j][k];
-                cout << pppp << ' ';
-            }cout << '\n';
-        }cout << '\n';
         
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
