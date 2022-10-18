@@ -12,8 +12,8 @@ int main() {
     int n;
     cin >> n;
 
-    for(int i = 1; i <= n; i++) cin >> a[i];
-    for(int i = 1; i <= n; i++) {
+    for(int i = 1; i < n + 1; i++) cin >> a[i];
+    for(int i = 1; i < n + 1; i++) {
         arr[i][n] = 0;
         if(a[n] < i) arr[i][n - 1] = 1;
         else arr[i][n - 1] = 0;
@@ -24,9 +24,12 @@ int main() {
         }
     }
 
-    for(int i = 1; i < n; i++) {
-        for(int j = i + 1; j <= n; j++) {
-            cout << arr[i][j] << ' ';
-        }cout << '\n';
+    long long ans = 0;
+
+    for(int i = 1; i < n - 1; i++) {
+        for(int j = i + 1; j < n; j++) {
+            if(a[i] < a[j]) ans += arr[a[i]][j];
+        }
     }
+    cout << ans << '\n';
 }
