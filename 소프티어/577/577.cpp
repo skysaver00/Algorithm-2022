@@ -13,8 +13,8 @@ int newx, newy;
 int x_[4] = {1, 0, -1, 0};
 int y_[4] = {0, 1, 0, -1};
 
-int x2_[4] = {2, 0, -2, 0};
-int y2_[4] = {0, 2, 0, -2};
+int x2_[4] = {-2, 0, 2, 0};
+int y2_[4] = {0, -2, 0, 2};
 
 void startbfs(int stx, int sty) {
 	count[stx][sty] = 1;
@@ -56,20 +56,20 @@ int main() {
 		}
     }
 	
-	int flag = 0;
 	int startx, starty;
+	int flag = 0;
 	for(int i = 0; i < h; i++) {
 		for(int j = 0; j < w; j++) {
 			int nowx, nowy;
 			nowx = i;
 			nowy = j;
+			flag = 0;
 			if(map[nowx][nowy] == 0) continue;
 			for(int k = 0; k < 4; k++) {
 				newx = nowx + x_[k];
 				newy = nowy + y_[k];
 				if(newx < 0 || newx >= h || newy < 0 || newy >= w) continue;
-				if(map[newx][newy] == 1 && flag == 1) flag = -1;
-				if(map[newx][newy] == 1 && flag == 0) flag = 1;
+				if(map[newx][newy] == 1) flag++;
 			}
 
 			if(flag == 1) {
@@ -89,10 +89,10 @@ int main() {
 		if(flag2 == 0) prev = -1;
 		front = que.front();
 		if(flag2 == 0) {
-			if(front == 0) cout << 'v' << '\n';
-			else if(front == 1) cout << '>' << '\n';
-			else if(front == 2) cout << '^' << '\n';
-			else if(front == 3) cout << '<' << '\n';
+			if(front == 0) cout << '^' << '\n';
+			else if(front == 1) cout << '<' << '\n';
+			else if(front == 2) cout << 'v' << '\n';
+			else if(front == 3) cout << '>' << '\n';
 
 			flag2 = 1;
 			cout << 'A';
@@ -107,6 +107,5 @@ int main() {
 
 		prev = front;
 	}
-
 	return 0;
 }
